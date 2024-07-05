@@ -271,14 +271,16 @@ function toggleFullscreen() {
 }
 fullscreen.addEventListener('click', toggleFullscreen);
 mainVideo.addEventListener("dblclick",  toggleFullscreen);
-
+videoPlayer.classList.contains("fulscreenCustom");
   document.addEventListener('fullscreenchange', function () {
     if (!document.fullscreenElement) {
       fullscreenIcon.src = "./assets/icons/Fullscreen-icon.svg"
       fullscreenIcon.title = "Enter Fullscreen"
+      videoPlayer.classList.remove("fulscreenCustom");
     } else {
       fullscreenIcon.src = "./assets/icons/Fullscreen-Exit-icon.svg"
       fullscreenIcon.title = "Exit Fullscreen"
+      videoPlayer.classList.add("fulscreenCustom");
     }
 });
 
