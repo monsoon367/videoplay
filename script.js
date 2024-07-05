@@ -1,3 +1,5 @@
+const videoContainer=document.querySelector('.videoContainer');
+
 const videoPlayer = document.querySelectorAll('.videoPlayer')
 videoPlayer.forEach(videoPlayer => {
     const videoPlayer_html=`${videoPlayer.innerHTML}
@@ -9,6 +11,11 @@ videoPlayer.forEach(videoPlayer => {
 const memes=document.querySelector('#memes');
 //sellect all require tags
 const mainVideo=videoPlayer.querySelector('#mainVideo'),
+
+
+fullscreen=videoPlayer.querySelector('#fullscreen'),
+fullscreenIcon=videoPlayer.querySelector('#fullscreenIcon'),
+
 progressContainer=videoPlayer.querySelector('.progressContainer'),
 rangeProgress=videoPlayer.querySelector('#rangeProgress'),
 progressShadow=videoPlayer.querySelector('.progressShadow'),
@@ -30,8 +37,6 @@ currentMobile=videoPlayer.querySelector('.currentMobile'),
 duration=videoPlayer.querySelector('.duration'),
 current=videoPlayer.querySelector('.current'),
 pictureInPicture=videoPlayer.querySelector('#pictureInPicture'),
-fullscreen=videoPlayer.querySelector('#fullscreen'),
-fullscreenIcon=videoPlayer.querySelector('#fullscreenIcon'),
 twoTimeSpeedNotif=videoPlayer.querySelector('.twoTimeSpeedNotif'),
 rewindNotif=videoPlayer.querySelector('.rewindNotif'),
 arrowLOne=videoPlayer.querySelector('.arrowLOne'),
@@ -257,7 +262,7 @@ function esckey(evt) {
 //Fullscreen
 function toggleFullscreen() {
     if (!document.fullscreenElement) {
-        videoPlayer.requestFullscreen();
+        videoContainer.requestFullscreen();
         screen.orientation.lock("landscape-primary");
       }else{
         document.exitFullscreen();
