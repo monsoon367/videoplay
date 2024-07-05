@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="videoPlayer paused">
+                <video preload="metadata" src="./jojo.mp4" id="mainVideo"></video>
+                <div class="popupElementContainer">
+                    <div class="popupElement">
+                        <div class="blockLeft">
+                            <div class="rewindNotif">
+                                <p>-10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowLOne">&blacktriangleleft;</span><span class="arrowLTwo">&blacktriangleleft;</span><span class="arrowLThree">&blacktriangleleft;</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blockMiddle">
+                            <div class="twoTimeSpeedNotif">
+                                <p>2<span style="font-size: 10px;">X</span></p><div><p style="font-size: 30px; letter-spacing: -14px; line-height: 0.8;">&blacktriangleright;&blacktriangleright;</p></div>
+                            </div>
+                        </div>
+                        <div class="blockRight">
+                            <div class="forwardNotif">
+                                <p>10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowROne">&blacktriangleright;</span><span class="arrowRTwo">&blacktriangleright;</span><span class="arrowRThree">&blacktriangleright;</span></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="controllersMobile">
+                    <div class="listMobileControllers">
+                        <div class="blockRewind"></div>
+                        <div class="blockCenter">
+                            <span class="iconMobile">
+                                <button  id="playPauseMobile"><img draggable="false"src="./assets/icons/Play-icon.svg" id="playPauseMobileIcon"></button>
+                            </span>
+                        </div>
+                        <div class="blockForward"></div>
+                    </div>
+                </div>
+                <div class="controllers">
+                    <div class="progressContainer">
+                        <div id="MainProgresInput">
+                            <div class="progressBarBufBg" tabindex="-1">
+                                <canvas class="progressBuffer" tabindex="-1"></canvas>
+                                <div class="progressShadow" tabindex="-1"></div>
+                            </div>
+                        </div>
+                        <div id="MainProgresInput">
+                            <input type="range" min="0" max="100" step="1" value="0" id="rangeProgress">
+                        </div>
+                    </div>
+                    <div class="listControllers">
+                        <div class="leftControllers">
+                            <span class="icon">
+                                <button id="fastRewind"><img draggable="false" title="Rewind" src="./assets/icons/Rewind-icon.svg" id="fastRewindIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button  id="playPause"><img draggable="false" title="Play" src="./assets/icons/Play-icon.svg" id="playPauseIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="fastForward"><img draggable="false" title="Forward" src="./assets/icons/Forward-icon.svg" id="fastForwardIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="volumeBtn"><img draggable="false" title="Mute" src="./assets/icons/Volume-up-icon.svg" id="volumeBtnIcon"></button>
+                                <input type="range" min="0" max="100" step="1" value="100" id="volumeRange">
+                            </span>
+                            <div class="timer">
+                                <span class="current">0.00</span> / <span class="duration">0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rightControllers">
+                            <span class="icon">
+                                <button id="setting"><img draggable="false" title="Settings" src="./assets/icons/Setting-icon.svg" id="settingIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="pictureInPicture"><img draggable="false" title="Picture In Picture" src="./assets/icons/PictureInPicture.svg" id="pictureInPicture"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="fullscreen"><img draggable="false" title="Fullscreen" src="./assets/icons/Fullscreen-icon.svg" id="fullscreenIcon"></button>
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>

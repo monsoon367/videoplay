@@ -1,0 +1,472 @@
+*, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    background: rgb(0, 162, 255);
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.videoPlayer {
+    display: flex;
+    position: relative;
+    width: 700px;
+    height: 100%;
+}
+.videoPlayer::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+  }
+
+  .videoPlayer::after {
+    content: "";
+    padding-top: 56.25%;
+  }
+
+ 
+.videoPlayer:hover .controllersMobile,
+.videoPlayer.paused .controllersMobile,
+.videoPlayer:hover::before,
+.videoPlayer.paused::before,
+.videoPlayer:hover .controllers,
+.videoPlayer.paused .controllers {
+    opacity: 1;
+}
+
+#mainVideo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border-radius: 0px;
+}
+
+.popupElementContainer {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.popupElement {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.speedArrow p {
+    font-size: 30px; letter-spacing: -14px; line-height: 0.8;
+}
+.blockLeft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+    background: none;
+}
+.rewindNotif {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.500);
+    border-radius: 20px;
+    width: 90px;
+    height: 50px;
+    padding-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowLOne {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowLTwo {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowLThree {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.blockMiddle {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 30%;
+    background: none;
+}
+.twoTimeSpeedNotif {
+    margin-top: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.500);
+    border-radius: 20px;
+    width: 80px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.blockRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+    background: none;
+}
+.forwardNotif {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.500);
+    border-radius: 20px;
+    width: 90px;
+    height: 50px;
+    padding-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowROne {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowRTwo {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.arrowRThree {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+
+
+
+
+.controllersMobile {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+.listMobileControllers {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.blockRewind {
+    content: '';
+    height: 100%;
+    width: 50%;
+    background: none;
+}
+.blockCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 20%;
+    background: none;
+}
+.blockForward {
+    content: '';
+    height: 100%;
+    width: 50%;
+    background: none;
+}
+
+.iconMobile {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.iconMobile button {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.368);
+    height: 80px;
+    width: 80px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.iconMobile img {
+    display: flex;
+    margin: auto;
+    filter: invert(100%);
+    width: 50px;
+}
+
+.controllers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-top: 16px;
+    height: 50px;
+    width: 100%;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+/*progressContainer start*/
+.progressContainer {
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    top: -10%;
+    transform: translateY(10%);
+}
+
+/*MainProgresInput*/
+#MainProgresInput {
+    display: flex;
+    position:absolute;
+    margin: auto;
+    width: 100%;
+    height: 15px;
+}
+#rangeProgress {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: auto;
+    width: 99%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+#rangeProgress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: rgb(255, 0, 0);
+    box-shadow: 0px 0px 0px 2px red;
+    border-radius: 50%;
+    scale: 1;
+    transition: 150ms all;
+}
+/*MainProgresBuffer*/
+.progressBarBufBg {
+    position: relative;
+    margin: auto;
+    width: 98%;
+    height: 4px;
+    background: #f0f0f063;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.progressBuffer {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+/*MainProgresShadow*/
+.progressShadow {
+    position: relative;
+    width: 0%;
+    height: 4px;
+    background: red;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+/*progressContainer finnish*/
+
+.controllers .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: 2s;
+}
+.controllers .icon img {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    width: 20px;
+    filter: invert(100%);
+}
+
+.icon button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.controllers .listControllers {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 98%;
+    z-index: 100;
+}
+.controllers .listControllers .leftControllers,
+.controllers .listControllers .rightControllers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*RewindForward*/
+#fastRewind:active #fastRewindIcon {
+    transition: 0.2s;
+    transform: rotate(-45deg);
+}
+#fastForward:active #fastForwardIcon {
+    transition: 0.2s;
+    transform: rotate(45deg);
+}
+
+/*volumeRange*/
+#volumeBtnIcon {
+    width: 21px;
+}
+#volumeRange {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    width: 0px;
+    opacity: 1;
+    transition: 0.4s;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+#volumeRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: 0.3s;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.icon:hover #volumeRange,
+#volumeRange:focus-within{
+    display: inline-block;
+    width: 60px;
+}
+.icon:hover #volumeRange::-webkit-slider-thumb,
+#volumeRange:focus-within::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+/*timer*/
+.timer {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    white-space: nowrap;
+    color: white;
+    margin-left: 5px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/*setting*/
+#setting:active #settingIcon {
+    transition: 0.2s;
+    transform: rotate(45deg);
+}
+
+#pictureInPicture {
+    width: 28px;
+}
+
+#fullscreen {
+    transition: 2s;
+}
