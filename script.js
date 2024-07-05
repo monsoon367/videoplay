@@ -258,6 +258,7 @@ function esckey(evt) {
        alert("memes")
     }
  }
+             
 
 //Fullscreen
 function toggleFullscreen() {
@@ -271,6 +272,8 @@ function toggleFullscreen() {
 }
 fullscreen.addEventListener('click', toggleFullscreen);
 mainVideo.addEventListener("dblclick",  toggleFullscreen);
+
+
 videoPlayer.classList.contains("fulscreenCustom");
   document.addEventListener('fullscreenchange', function () {
     if (!document.fullscreenElement) {
