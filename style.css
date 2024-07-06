@@ -34,13 +34,20 @@ body {
 .videoPlayer {
     display: flex;
     position: relative;
-    width: 800px;
-    height: 400px;
+    width: 795px;
+    height: 450px;
+    border-radius: 15px;
     background-color: rgb(0, 0, 0);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 .fulscreenCustom {
     width: 100%;
-    height: auto;
+    height:100vh;
+    border-radius: 0px;
 }
 .videoPlayer::before {
     content: "";
@@ -65,12 +72,16 @@ body {
 }
 
 #mainVideo {
+    display: flex;
     margin: auto;
     position: relative;
-    width: 100%;
+    width: auto;
     height: 100%;
     outline: none;
     border-radius: 0px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .popupElementContainer {
@@ -82,7 +93,7 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 10;
     pointer-events: none;
 }
 .popupElement {
@@ -204,7 +215,18 @@ body {
 }
 
 
-
+.mainVideoClickF {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+    background: rgba(0, 173, 118, 0);
+}
 
 
 .controllersMobile {
@@ -212,7 +234,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 8;
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 150ms ease-in-out;
@@ -280,7 +302,7 @@ body {
     padding-top: 16px;
     height: 50px;
     width: 100%;
-    z-index: 3;
+    z-index: 9;
     opacity: 0;
     transition: opacity 150ms ease-in-out;
 }
@@ -473,4 +495,66 @@ body {
 
 #fullscreen {
     transition: 2s;
+}
+
+.settingsContainer {
+    position: absolute;
+    right: 25px;
+    bottom: 62px;
+    width: auto;
+    height: auto;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgb(28 28 28 /90%);
+    z-index: 11;
+}
+
+.mainSettings {
+    display: none;
+    opacity: 0;
+    position: relative;
+    width: 300px;
+    height: auto;
+}
+.settingButton li {
+    display: flex;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    padding: 12px;
+    font-size: 14px;
+}
+.settingButton li:hover {
+    background: rgba(21, 21, 21, 0.9);
+    border: 2px rgba(21, 21, 21, 0.9);
+    transition: 150ms all;
+}
+.settingsTextContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.settingsTextContainer .sBtnL {
+    left: 0;
+    justify-content: left;
+    text-align: left;
+
+}
+.settingsTextContainer .sBtnR {
+    justify-content: end;
+    right: 0;
+    text-align: end;
+}
+#settingsIconL {
+    display: flex;
+    width: 20px;
+    filter: invert(100%);
+    margin-right: 12px;
+}
+#settingsIconR {
+    display: flex;
+    width: 10px;
+    filter: invert(100%);
+    margin-left: 5px;
 }

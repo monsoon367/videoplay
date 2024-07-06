@@ -10,7 +10,8 @@
     <div class="videoContainer">
         <div class="container">
             <div class="videoPlayer paused">
-                <video preload="metadata" src="./jojo.mp4" id="mainVideo"></video>
+                <video preload="metadata" src="./josuke.mp4" id="mainVideo"></video>
+                <!--controller-->
                 <div class="popupElementContainer">
                     <div class="popupElement">
                         <div class="blockLeft">
@@ -33,7 +34,6 @@
                                     <p style="padding-right: 12px;"><span class="arrowROne">&blacktriangleright;</span><span class="arrowRTwo">&blacktriangleright;</span><span class="arrowRThree">&blacktriangleright;</span></p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -48,6 +48,7 @@
                         <div class="blockForward"></div>
                     </div>
                 </div>
+                <div class="mainVideoClickF"></div>
                 <div class="controllers">
                     <div class="progressContainer">
                         <div id="MainProgresInput">
@@ -90,9 +91,51 @@
                             <span class="icon">
                                 <button id="fullscreen"><img draggable="false" title="Fullscreen" src="./assets/icons/Fullscreen-icon.svg" id="fullscreenIcon"></button>
                             </span>
-                            
                         </div>
                     </div>
+                </div>
+                <div class="settingsContainer">
+                    <div class="mainSettings">
+                        <div class="SettingsInput">
+                            <ul class="settingButton">
+                                <li>
+                                    <img draggable="false" src="./assets/icons/Qualityicon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Quality</p><p class="sBtnR">360p</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                                </li>
+                                <li>
+                                    <img draggable="false" src="./assets/icons/Playback-Speedf-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Playback speed</p><p class="sBtnR">Normal</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                                </li>
+                                <li>
+                                    <img draggable="false" src="./assets/icons/Caption-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Caption</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                                <li>
+                                    <img draggable="false" src="./assets/icons/Lock-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Lock screen</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                                <li>
+                                    <img draggable="false" src="./assets/icons/Setting-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Additional settings</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="playbackSpeed">
+                        <div class="playback">
+                            <span>Playback Speed</span>
+                            <li data-speed="0.25">0.25</li>
+                            <li data-speed="0.5">0.5</li>
+                            <li data-speed="0.75">0.75</li>
+                            <li data-speed="1" class="active">Normal</li>
+                            <li data-speed="1.25">1.25</li>
+                            <li data-speed="1.5">1.5</li>
+                            <li data-speed="1.75">1.75</li>
+                            <li data-speed="2">2</li>
+                        </div>
+
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -8,10 +8,10 @@ videoPlayer.forEach(videoPlayer => {
 
     videoPlayer.innerHTML=videoPlayer_html;
 
-const memes=document.querySelector('#memes');
+
 //sellect all require tags
 const mainVideo=videoPlayer.querySelector('#mainVideo'),
-
+mainVideoClickF=videoPlayer.querySelector('.mainVideoClickF'),
 
 fullscreen=videoPlayer.querySelector('#fullscreen'),
 fullscreenIcon=videoPlayer.querySelector('#fullscreenIcon'),
@@ -132,8 +132,11 @@ function toggleEndTwoTimeSpeed() {
     mainVideo.playbackRate = 1.0;
     twoTimeSpeedNotif.style.opacity="0";
 };
-mainVideo.addEventListener('mousedown', toggleTwoTimeSpeed);
-mainVideo.addEventListener('mouseup', toggleEndTwoTimeSpeed);
+mainVideoClickF.addEventListener('mousedown', toggleTwoTimeSpeed);
+mainVideoClickF.addEventListener('mouseup', toggleEndTwoTimeSpeed);
+videoPlayer.addEventListener('mouseup', toggleEndTwoTimeSpeed);
+videoContainer.addEventListener('mouseup', toggleEndTwoTimeSpeed);
+
 blockRewind.addEventListener('touchstart', toggleTwoTimeSpeed);
 blockRewind.addEventListener('touchend', toggleEndTwoTimeSpeed);
 blockCenter.addEventListener('touchstart', toggleTwoTimeSpeed);
@@ -250,15 +253,7 @@ volumeRange.addEventListener('input',() => {
 pictureInPicture.addEventListener('click',()=>{
     mainVideo.requestPictureInPicture();
 });
-
-
-
-function esckey(evt) {
-    if (evt.keyCode == 27) {
-       alert("memes")
-    }
- }
-             
+   
 
 //Fullscreen
 function toggleFullscreen() {
@@ -271,7 +266,7 @@ function toggleFullscreen() {
       }
 }
 fullscreen.addEventListener('click', toggleFullscreen);
-mainVideo.addEventListener("dblclick",  toggleFullscreen);
+mainVideoClickF.addEventListener("dblclick",  toggleFullscreen);
 
 
 videoPlayer.classList.contains("fulscreenCustom");

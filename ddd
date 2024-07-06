@@ -1,0 +1,53 @@
+<li>Caption</li>
+                            <li>Lock screen</li>
+                            <li>Additional settings</li>
+
+                            .playbackSpeed {
+                                display: flex;
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                            }
+                            .playbackSpeed .playback span {
+                                display: block;
+                                font-size: 14px;
+                                font-weight: 300px;
+                                padding: 15px 30px;
+                                border: 1px solid rgb(83, 83, 83);
+                            }
+                            .playbackSpeed .playback ul {
+                                position: relative;
+                            }
+                            .playbackSpeed .playback li {
+                                position: relative;
+                                width: 100%;
+                                cursor: pointer;
+                                text-align: left;
+                                padding: 12px 33px;
+                                display: block;
+                                font-size: 14px;
+                            }
+                            .playbackSpeed .playback li:hover {
+                                background: rgba(28, 28, 28, 0.9);
+                            }
+                            .playbackSpeed .playback li.active::before {
+                                content: '\e876';
+                                font-family: "material symbols outlined";
+                                position: absolute;
+                                left: 7px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                padding-right: 10px;
+                                font-size: 18px;
+                                
+                            }
+                            .playbackSpeed::-webkit-scrollbar {
+                                width: 8;
+                                background: transparent;
+                            }
+                            .playbackSpeed::-webkit-scrollbar-thumb {
+                                height: 20px;
+                                border: 2px solid transparent;
+                                background: rgba(83, 83, 83, 0.9);
+                                border-radius: 20px;
+                            }
