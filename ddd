@@ -51,3 +51,53 @@
                                 background: rgba(83, 83, 83, 0.9);
                                 border-radius: 20px;
                             }
+
+
+
+                            <span>Playback Speed</span>
+                            <li  value="0.25">0.25</li>
+                            <li  value="0.5">0.5</li>
+                            <li  value="0.75">0.75</li>
+                            <li  value="1" class="active">Normal</li>
+                            <li  value="1.25">1.25</li>
+                            <li  value="1.5">1.5</li>
+                            <li  value="1.75">1.75</li>
+                            <li  value="2">2</li>
+
+
+                            document.addEventListener("keydown", e => {
+                                const tagName = document.activeElement.tagName.toLowerCase()
+                              
+                                if (tagName === "input") return
+                              
+                                switch (e.key.toLowerCase()) {
+                                  case " ":
+                                    if (tagName === "button") return
+                                  case "k":
+                                    togglePlay()
+                                    break
+                                  case "f":
+                                    toggleFullscreen()
+                                    break
+                                  case "t":
+                                    toggleTheaterMode()
+                                    break
+                                  case "i":
+                                    toggleMiniPlayerMode()
+                                    break
+                                  case "m":
+                                    toggleMute()
+                                    break
+                                  case "arrowleft":
+                                  case "j":
+                                    skip(-5)
+                                    break
+                                  case "arrowright":
+                                  case "l":
+                                    skip(5)
+                                    break
+                                  case "c":
+                                    toggleCaptions()
+                                    break
+                                }
+                              })

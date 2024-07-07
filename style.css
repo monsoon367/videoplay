@@ -34,8 +34,8 @@ body {
 .videoPlayer {
     display: flex;
     position: relative;
-    width: 795px;
-    height: 450px;
+    width: 848px;
+    height: 478px;
     border-radius: 15px;
     background-color: rgb(0, 0, 0);
     overflow: hidden;
@@ -557,4 +557,57 @@ body {
     width: 10px;
     filter: invert(100%);
     margin-left: 5px;
+}
+
+.playbackSpeed {
+    display: block;
+    opacity: 1;
+    position: relative;
+    width: 210px;
+    height: 250px;
+    overflow: auto;
+}
+.playbackSpeed::-webkit-scrollbar {
+    width: 15px;
+    background: none;
+}
+.playbackSpeed::-webkit-scrollbar-thumb {
+    height: 30px;
+    border: 2px solid transparent;
+    background: rgba(83, 83, 83, 0.9);
+    cursor: pointer;
+}
+.playback span {
+    display: block;
+    font-size: 14px;
+    font-weight: 300px;
+    text-align: center;
+    padding: 15px 0px;
+    border: 1px solid rgb(83, 83, 83);
+}
+.playback ul {
+    position: relative;
+}
+.playback li {
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 33px;
+    cursor: pointer;
+}
+.playback li.active::before {
+    content: '\e876';
+    font-family: "material symbols outlined";
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 10px;
+    font-size: 18px;
+}
+
+.playback li:hover {
+    background: rgba(21, 21, 21, 0.9);
+    border: 2px rgba(21, 21, 21, 0.9);
+    transition: 150ms all;
 }

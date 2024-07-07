@@ -38,6 +38,7 @@ duration=videoPlayer.querySelector('.duration'),
 current=videoPlayer.querySelector('.current'),
 pictureInPicture=videoPlayer.querySelector('#pictureInPicture'),
 twoTimeSpeedNotif=videoPlayer.querySelector('.twoTimeSpeedNotif'),
+playback = videoPlayer.querySelectorAll(".playback li"),
 rewindNotif=videoPlayer.querySelector('.rewindNotif'),
 arrowLOne=videoPlayer.querySelector('.arrowLOne'),
 arrowLTwo=videoPlayer.querySelector('.arrowLTwo'),
@@ -47,52 +48,6 @@ forwardNotif=videoPlayer.querySelector('.forwardNotif'),
 arrowROne=videoPlayer.querySelector('.arrowROne'),
 arrowRTwo=videoPlayer.querySelector('.arrowRTwo'),
 arrowRThree=videoPlayer.querySelector('.arrowRThree');
-
-
-
-document.addEventListener("keydown", e => {
-    const tagName = document.activeElement.tagName.toLowerCase()
-  
-    if (tagName === "input") return
-  
-    switch (e.key.toLowerCase()) {
-      case " ":
-        if (tagName === "button") return
-      case "k":
-        togglePlay()
-        break
-      case "f":
-        toggleFullscreen()
-        break
-      case "t":
-        toggleTheaterMode()
-        break
-      case "i":
-        toggleMiniPlayerMode()
-        break
-      case "m":
-        toggleMute()
-        break
-      case "arrowleft":
-      case "j":
-        skip(-5)
-        break
-      case "arrowright":
-      case "l":
-        skip(5)
-        break
-      case "c":
-        toggleCaptions()
-        break
-    }
-  })
-
-  function keyPress (e) {
-    if(e.key === "Escape") {
-        toggleFullscreen
-    }
-}
-
 
 
 mainVideo.addEventListener("play",()=>{
@@ -119,6 +74,21 @@ function togglePlay(){
 playPause.addEventListener('click', togglePlay);
 playPauseMobile.addEventListener('click', togglePlay);
 
+
+playback.forEach(playback => {
+    playback.addEventListener("click", () => {
+    removeActiveClasses(playback);
+    playback.classList.add("active");
+    let speed = playback.getAttribute("data-speed");
+    mainVideo.playbackRate = speed;
+  });
+});
+function removeActiveClasses() {
+    playback.forEach(playback => {
+        playback.classList.remove("active");
+    })
+}
+
 //two time speed event
 let eventTimerId;
 function toggleTwoTimeSpeed() {
@@ -129,8 +99,8 @@ function toggleTwoTimeSpeed() {
 };
 function toggleEndTwoTimeSpeed() {
     clearTimeout(eventTimerId);
-    mainVideo.playbackRate = 1.0;
     twoTimeSpeedNotif.style.opacity="0";
+    mainVideo.playbackRate = speed;
 };
 mainVideoClickF.addEventListener('mousedown', toggleTwoTimeSpeed);
 mainVideoClickF.addEventListener('mouseup', toggleEndTwoTimeSpeed);
@@ -290,7 +260,6 @@ document.addEventListener('keydown', function (e) {
 });
 
 
+
+
 });//end
-
-
-
