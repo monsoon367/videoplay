@@ -36,9 +36,35 @@ durationMobile=videoPlayer.querySelector('.durationMobile'),
 currentMobile=videoPlayer.querySelector('.currentMobile'),
 duration=videoPlayer.querySelector('.duration'),
 current=videoPlayer.querySelector('.current'),
+
+autoplay=videoPlayer.querySelector('.auto-play'),
+
+setting=videoPlayer.querySelector('#setting'),
+settingsContainer=videoPlayer.querySelector('.settingsContainer'),
+mainSettings=videoPlayer.querySelector('.mainSettings'),
+
+deafultQuality=videoPlayer.querySelector('#deafultQuality'),
+qualityStatus=videoPlayer.querySelector('#qualityStatus'),
+settingList=videoPlayer.querySelector('.settingList'),
+qualityBtn=videoPlayer.querySelector('#qualityBtn'),
+qualityList=videoPlayer.querySelector('.qualityList'),
+qualityCloseBtn=videoPlayer.querySelector('#qualityCloseBtn'),
+
+playbackStatus=videoPlayer.querySelector('#playbackStatus'),
+customPlaybackStatus=videoPlayer.querySelector('#customPlaybackStatus'),
+playbackList=videoPlayer.querySelector('.playbackList'),
+playback=videoPlayer.querySelectorAll(".playbackBtnList li"),
+playbackSpeedBtn=videoPlayer.querySelector('#playbackSpeedBtn'),
+playbackCloseBtn=videoPlayer.querySelector('#playbackCloseBtn'),
+customLinkRangePlayback=videoPlayer.querySelector('#customLinkRangePlayback'),
+customRangePlayback=videoPlayer.querySelector('.customRangePlayback'),
+
 pictureInPicture=videoPlayer.querySelector('#pictureInPicture'),
 twoTimeSpeedNotif=videoPlayer.querySelector('.twoTimeSpeedNotif'),
-playback = videoPlayer.querySelectorAll(".playback li"),
+playbackRangeCloseBtn=videoPlayer.querySelector('#playbackRangeCloseBtn'),
+rangeCustomPlayback=videoPlayer.querySelector("#rangeCustomPlayback"),
+customPlaybackNotif=videoPlayer.querySelector("#customPlaybackNotif"),
+PlaybackRangeValue=videoPlayer.querySelector("#PlaybackRangeValue"),
 rewindNotif=videoPlayer.querySelector('.rewindNotif'),
 arrowLOne=videoPlayer.querySelector('.arrowLOne'),
 arrowLTwo=videoPlayer.querySelector('.arrowLTwo'),
@@ -47,7 +73,31 @@ rewindTime=videoPlayer.querySelector('.arrowLThree'),
 forwardNotif=videoPlayer.querySelector('.forwardNotif'),
 arrowROne=videoPlayer.querySelector('.arrowROne'),
 arrowRTwo=videoPlayer.querySelector('.arrowRTwo'),
-arrowRThree=videoPlayer.querySelector('.arrowRThree');
+arrowRThree=videoPlayer.querySelector('.arrowRThree'),
+quality_ul = videoPlayer.querySelector(".settingsContainer [data-label='qualityList'] ul"),
+qualitys = videoPlayer.querySelectorAll("source[size]");
+
+document.addEventListener('keydown',(event) => {
+    const {activeElement} = document
+    const hasButtonRole = activeElement?.getAttribute('role') === 'button'
+    if (hasButtonRole) {
+        if (['Spacebar', ' ', 'Enter'].includes(event.key)) {
+            event.preventDefault()
+        }
+        if (event.key === 'Enter') {
+            activeElement.click()
+        }
+    }
+})
+document.addEventListener('keyup',(event) => {
+    const {activeElement} = document
+    const hasButtonRole = activeElement?.getAttribute('role') === 'button'
+    if (hasButtonRole && ['Spacebar', ' ', ].includes(event.key)) {
+        event.preventDefault()
+        activeElement.click()
+    }
+})
+
 
 
 mainVideo.addEventListener("play",()=>{
@@ -75,32 +125,19 @@ playPause.addEventListener('click', togglePlay);
 playPauseMobile.addEventListener('click', togglePlay);
 
 
-playback.forEach(playback => {
-    playback.addEventListener("click", () => {
-    removeActiveClasses(playback);
-    playback.classList.add("active");
-    let speed = playback.getAttribute("data-speed");
-    mainVideo.playbackRate = speed;
-  });
-});
-function removeActiveClasses() {
-    playback.forEach(playback => {
-        playback.classList.remove("active");
-    })
-}
 
 //two time speed event
 let eventTimerId;
 function toggleTwoTimeSpeed() {
     eventTimerId = setTimeout(function () {
-		mainVideo.playbackRate = 2.0;
+		
     twoTimeSpeedNotif.style.opacity="1";
 	}, 700);
 };
 function toggleEndTwoTimeSpeed() {
     clearTimeout(eventTimerId);
     twoTimeSpeedNotif.style.opacity="0";
-    mainVideo.playbackRate = speed;
+
 };
 mainVideoClickF.addEventListener('mousedown', toggleTwoTimeSpeed);
 mainVideoClickF.addEventListener('mouseup', toggleEndTwoTimeSpeed);
@@ -129,18 +166,12 @@ fastRewind.addEventListener('click', toggleRewind);
 fastForward.addEventListener('click', toggleForward);
 
 
+//sliderupdate
 mainVideo.addEventListener('timeupdate', function() {
     const proggres = (mainVideo.currentTime / mainVideo.duration) * 100;
-    rangeProgress.value = proggres;
     progressShadow.style.width = proggres + "%";
 });
-rangeProgress.addEventListener('input', function(){
-    const time = (rangeProgress.value / 100) * mainVideo.duration;
-    mainVideo.currentTime = time;
-});
-rangeProgress.oninput = function(){
-    progressShadow.style.width = rangeProgress.value + "%";
-}
+
 function drawProgress(canvas, buffered, duration) {
     let context = canvas.getContext('2d', { antialias: false });
     context.fillStyle = "#e4e4e4";
@@ -184,7 +215,6 @@ function formatDuration(time){
     }
 }
 
-
 // Volume
 const toggleMute = () => {
     mainVideo.muted = !mainVideo.muted;
@@ -198,6 +228,7 @@ const toggleMute = () => {
         volumeBtnIcon.title = "Unmute"
     } else {
         volumeRange.value = mainVideo.volume * 100;
+        
         volumeBtnIcon.src = "./assets/icons/Volume-up-icon.svg";
         volumeRange.style.display = "inline-block";
         volumeBtnIcon.title = "Mute"
@@ -218,7 +249,7 @@ volumeRange.addEventListener('input',() => {
         volumeBtnIcon.src = "./assets/icons/Volume-up-icon.svg";
     }
 });
-   
+
 //pictureInPicture
 pictureInPicture.addEventListener('click',()=>{
     mainVideo.requestPictureInPicture();
@@ -237,7 +268,6 @@ function toggleFullscreen() {
 }
 fullscreen.addEventListener('click', toggleFullscreen);
 mainVideoClickF.addEventListener("dblclick",  toggleFullscreen);
-
 
 videoPlayer.classList.contains("fulscreenCustom");
   document.addEventListener('fullscreenchange', function () {
@@ -259,6 +289,160 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
+autoplay.addEventListener("click", () => {
+    autoplay.classList.toggle("active");
+    if (autoplay.classList.contains("active")) {
+        autoplay.title = "Autoplay is on";
+    } else {
+        autoplay.title = "Autoplay is off";
+    }
+  });
+
+function toggleSettingCloseAll() {
+    settingsContainer.classList.remove("scOpen");
+    settingList.classList.remove("playListToLeft");
+    qualityList.classList.remove("qualityListOpen");
+    settingsContainer.classList.remove("scQualityWHa");
+    settingList.classList.remove("playListToLeft");
+    playbackList.classList.remove("playListOpen");
+    settingsContainer.classList.remove("scPlaybackWHa");
+    settingsContainer.classList.remove("scPlaybackRangeWHa");
+    playbackList.classList.remove("playListToLeft");
+    customRangePlayback.classList.remove("cusRangePlaybackOpen");
+
+}
+
+setting.addEventListener('click',() => {
+    if (settingsContainer.classList.contains("scOpen")) {
+        toggleSettingCloseAll();
+    } else {
+        settingsContainer.classList.add("scOpen");
+    }
+})
+mainVideoClickF.addEventListener('click',toggleSettingCloseAll);
+playPause.addEventListener('click', toggleSettingCloseAll);
+fastRewind.addEventListener('click', toggleSettingCloseAll);
+fastForward.addEventListener('click', toggleSettingCloseAll);
+pictureInPicture.addEventListener('click', toggleSettingCloseAll);
+fullscreen.addEventListener('click', toggleSettingCloseAll);
+
+
+qualityBtn.addEventListener('click',() => {
+    settingList.classList.add("playListToLeft");
+    qualityList.classList.add("qualityListOpen");
+    settingsContainer.classList.add("scQualityWHa");
+});
+
+qualityCloseBtn.addEventListener('click',() => {
+    settingList.classList.remove("playListToLeft");
+    qualityList.classList.remove("qualityListOpen");
+    settingsContainer.classList.remove("scQualityWHa");
+});
+
+
+playbackSpeedBtn.addEventListener('click',() => {
+    settingList.classList.add("playListToLeft");
+    playbackList.classList.add("playListOpen");
+    settingsContainer.classList.add("scPlaybackWHa");
+
+});
+playbackCloseBtn.addEventListener('click',() => {
+    settingList.classList.remove("playListToLeft");
+    playbackList.classList.remove("playListOpen");
+    settingsContainer.classList.remove("scPlaybackWHa");
+});
+
+customLinkRangePlayback.addEventListener('click',() => {
+    settingsContainer.classList.remove("scPlaybackWHa");
+    settingsContainer.classList.add("scPlaybackRangeWHa");
+    playbackList.classList.add("playListToLeft");
+    customRangePlayback.classList.add("cusRangePlaybackOpen");
+});
+
+playbackRangeCloseBtn.addEventListener('click',() => {
+    settingsContainer.classList.add("scPlaybackWHa");
+    settingsContainer.classList.remove("scPlaybackRangeWHa");
+    playbackList.classList.remove("playListToLeft");
+    customRangePlayback.classList.remove("cusRangePlaybackOpen");
+});
+    
+qualitys.forEach(event => {
+    let quality_html = `<li data-quality="${event.getAttribute('size')}" tabindex="0" role="button">${event.getAttribute('size')}p</li>`;
+    quality_ul.insertAdjacentHTML('afterbegin', quality_html);
+});
+
+const quality_li = videoPlayer.querySelectorAll(".settingsContainer [data-label='qualityList'] ul li");
+  quality_li.forEach((event) => {
+    event.addEventListener('click', (e) => {
+      let quality = event.getAttribute('data-quality');
+      removeActiveClasses(quality_li);
+      event.classList.add('active');
+      deafultQuality.style.display="none";
+
+
+      qualitys.forEach(event => {
+        if (event.getAttribute('size') == quality) {
+          let video_current_duration = mainVideo.currentTime;
+          let video_source = event.getAttribute('src');
+          qualityStatus.textContent = `${quality}p`;
+          mainVideo.src = video_source;
+          mainVideo.currentTime = video_current_duration;
+          mainVideo.play()
+        }
+      })
+    })
+})
+function removeActiveClasses(e) {
+    e.forEach((event) => {
+      event.classList.remove("active");
+    });
+}
+
+
+playback.forEach(playback => {
+    playback.addEventListener('click',() => {
+        removePlaybackActiveClasses(playback);
+        playback.classList.add("active");
+
+        let speed = playback.getAttribute("data-speed");
+
+        rangeCustomPlayback.value = speed * 100;
+
+        let cusPlayback = rangeCustomPlayback.value / 100;
+        mainVideo.playbackRate = cusPlayback;
+        
+        PlaybackRangeValue.textContent = `${cusPlayback}x`;
+
+        playbackStatus.textContent = speed;
+        if (speed == 1) {
+            playbackStatus.textContent = "Normal";
+        }
+    })
+    
+    rangeCustomPlayback.addEventListener('input',() => {
+        let cusPlayback = rangeCustomPlayback.value / 100;
+        mainVideo.playbackRate = cusPlayback;
+
+        let speed = playback.getAttribute("data-speed");
+        let togglePlaybackStatus = customPlaybackStatus.getAttribute("data-speed");
+        PlaybackRangeValue.textContent = `${cusPlayback}x`;
+        if (cusPlayback == speed) {
+            removePlaybackActiveClasses(playback);
+            playback.classList.add("active");
+        }
+
+        playbackStatus.textContent = cusPlayback;
+        if (cusPlayback == 1) {
+            playbackStatus.textContent = "Normal";
+        }
+    })
+})
+
+function removePlaybackActiveClasses() {
+    playback.forEach(playback => {
+        playback.classList.remove("active");
+    })
+}
 
 
 

@@ -1,0 +1,101 @@
+<div data-label="quality" hidden>
+<span>
+  <i class="material-symbols-outlined icon back_arrow" data-label="settingHome">
+    arrow_back
+  </i>
+  <span>Playback Quality </span>
+</span>
+<ul>
+  <li data-quality="auto" class="active">auto</li>
+</ul>
+</div>
+</div>
+  
+  
+  
+  const settingDivs = video_player.querySelectorAll('.settings > div');
+  const settingBack = video_player.querySelectorAll('.settings > div .back_arrow');
+  const quality_ul = video_player.querySelector(".settings > [data-label='quality'] ul");
+  const qualities = video_player.querySelectorAll("source[size]");
+
+  qualities.forEach(event => {
+    let quality_html = `<li data-quality="${event.getAttribute('size')}">${event.getAttribute('size')}p</li>`;
+    quality_ul.insertAdjacentHTML('afterbegin', quality_html);
+  })
+
+  const quality_li = video_player.querySelectorAll(".settings > [data-label='quality'] ul > li");
+  quality_li.forEach((event) => {
+    event.addEventListener('click', (e) => {
+      let quality = event.getAttribute('data-quality');
+      removeActiveClasses(quality_li);
+      event.classList.add('active');
+      qualities.forEach(event => {
+        if (event.getAttribute('size') == quality) {
+          let video_current_duration = mainVideo.currentTime;
+          let video_source = event.getAttribute('src');
+          mainVideo.src = video_source;
+          mainVideo.currentTime = video_current_duration;
+          playVideo();
+        }
+      })
+    })
+  })
+
+  settingBack.forEach((event) => {
+    event.addEventListener('click', (e) => {
+      let setting_label = e.target.getAttribute('data-label');
+      for (let i = 0; i < settingDivs.length; i++) {
+        if (settingDivs[i].getAttribute('data-label') == setting_label) {
+          settingDivs[i].removeAttribute('hidden');
+        } else {
+          settingDivs[i].setAttribute('hidden', "");
+        }
+      }
+    })
+  })
+
+  settingHome.forEach((event) => {
+    event.addEventListener('click', (e) => {
+      let setting_label = e.target.getAttribute('data-label');
+      for (let i = 0; i < settingDivs.length; i++) {
+        if (settingDivs[i].getAttribute('data-label') == setting_label) {
+          settingDivs[i].removeAttribute('hidden');
+        } else {
+          settingDivs[i].setAttribute('hidden', "");
+        }
+      }
+    })
+  })
+
+
+  function removeActiveClasses(e) {
+    e.forEach((event) => {
+      event.classList.remove("active");
+    });
+  }
+//end
+
+qualities.forEach(event => {
+  let quality_html = `<li data-quality="${event.getAttribute('size')}">${event.getAttribute('size')}p</li>`;
+  quality_ul.insertAdjacentHTML('afterbegin', quality_html);
+})
+
+
+
+const quality_li = videoPlayer.querySelectorAll(".qualityList > [data-label='quality'] ul > li");
+quality_li.forEach((event) => {
+  event.addEventListener('click', () => {
+    let quality = event.getAttribute('data-quality');
+    removeActiveClasses(quality_li);
+    event.classList.add('active');
+    qualities.forEach(event => {
+      if (event.getAttribute('size') == quality) {
+        let video_current_duration = mainVideo.currentTime;
+        let video_source = event.getAttribute('src');
+        mainVideo.src = video_source;
+        mainVideo.currentTime = video_current_duration;
+        playVideo();
+      }
+    })
+  })
+})

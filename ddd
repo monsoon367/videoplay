@@ -101,3 +101,246 @@
                                     break
                                 }
                               })
+
+                                  transition: 1s ease-in-out;
+
+    if (rangeCustomPlayback.value == 0) {
+        mainVideo.playbackRate= 0.25;
+        PlaybackRangeValue.innerHTML="0.25"
+    } else if (rangeCustomPlayback.value == 25) {
+        mainVideo.playbackRate= 0.5;
+        PlaybackRangeValue.innerHTML="0.5"
+    } else if (rangeCustomPlayback.value == 50) {
+        mainVideo.playbackRate= 0.75;
+        PlaybackRangeValue.innerHTML="0.75"
+    } else if (rangeCustomPlayback.value == 75) {
+        mainVideo.playbackRate= 1.0;
+        PlaybackRangeValue.innerHTML="1"
+    } else if (rangeCustomPlayback.value == 100) {
+        mainVideo.playbackRate= 1.25;
+        PlaybackRangeValue.innerHTML="1.25"
+    } else if (rangeCustomPlayback.value == 125) {
+        mainVideo.playbackRate= 1.5;
+        PlaybackRangeValue.innerHTML="1.5"
+    } else if (rangeCustomPlayback.value == 150) {
+        mainVideo.playbackRate= 1.75;
+        PlaybackRangeValue.innerHTML="1.75"
+    } else if (rangeCustomPlayback.value == 175) {
+        mainVideo.playbackRate= 2;
+        PlaybackRangeValue.innerHTML="2"
+    }
+
+
+
+
+
+
+    settingsContainer.classList.contains("setContOpen")
+
+setting.addEventListener('click',() => {
+    if (settingsContainer.classList.contains("setContOpen")) {
+        settingsContainer.classList.remove("setContOpen")
+    } else {
+        settingsContainer.classList.add("setContOpen")
+    }
+    
+})
+
+playbackSpeedBtn.addEventListener('click',() => {
+    mainSettings.classList.add("setLeftClosed");
+    playbackSpeedContainer.style.display="block"
+    setTimeout(function(){
+        playbackSpeedContainer.classList.add("playbackSpeedContainerOpen");
+    }, 50);  
+    
+
+})
+playbackCloseBtn.addEventListener('click',() => {
+    setTimeout(function(){
+         playbackSpeedContainer.style.display="none"
+    }, 50);  
+    mainSettings.classList.remove("setLeftClosed");
+    playbackSpeedContainer.classList.remove("playbackSpeedContainerOpen");
+})
+
+.setContOpen {
+    display: block;
+    opacity: 1;
+    animation: fade-in 350ms;
+}
+.setContClose {
+    display: none;
+    opacity: 0;
+    animation: fade-out 350ms;
+}
+.setLeftClosed {
+    opacity: 0;
+    left: -100%;
+}
+    
+
+    display: none;
+    opacity: 0;
+
+
+divmain
+  divprogresbar
+    divprogresbuffer
+
+#MainProgresInput {
+    display: flex;
+    position:absolute;
+    margin: auto;
+    width: 100%;
+    height: 15px;
+}
+.progressBarBufBg {
+    position: relative;
+    margin: auto;
+    width: 98%;
+    height: 4px;
+    background: #f0f0f063;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.progressBuffer {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+<div class="playbackSpeedContainer">
+    <div class="playback">
+        <ul>
+            <img src="./assets/icons/Chevron-left.svg" alt="" id="playbackCloseBtn">
+            <span>Playback Speed</span><span id="customLinkRangePlayback">Custom</span>
+        </ul>
+        <li id="customPlaybackNotif"></li>
+        <li data-speed="0.25">0.25</li>
+        <li data-speed="0.5">0.5</li>
+        <li data-speed="0.75">0.75</li>
+        <li data-speed="1" class="active">Normal</li>
+        <li data-speed="1.25">1.25</li>
+        <li data-speed="1.5">1.5</li>
+        <li data-speed="1.75">1.75</li>
+        <li data-speed="2">2</li>
+    </div>
+</div>
+<div class="customRangePlaybackContainer">
+    <ul>
+        <img src="./assets/icons/Chevron-left.svg" alt="">
+        <span>Custom</span>
+    </ul>
+    <p id="PlaybackRangeValue">1</p>
+    <input type="range" min="25" max="200" value="100" step="5" id="rangeCustomPlayback">
+</div>
+
+
+
+<div class="playbackSpeedContainer">
+                        <div class="playback">
+                            <ul>
+                                <img src="./assets/icons/Chevron-left.svg" alt="" id="playbackCloseBtn">
+                                <span>Playback Speed</span><span id="customLinkRangePlayback">Custom</span>
+                            </ul>
+                            <li id="customPlaybackNotif"></li>
+                            <li data-speed="0.25">0.25</li>
+                            <li data-speed="0.5">0.5</li>
+                            <li data-speed="0.75">0.75</li>
+                            <li data-speed="1" class="active">Normal</li>
+                            <li data-speed="1.25">1.25</li>
+                            <li data-speed="1.5">1.5</li>
+                            <li data-speed="1.75">1.75</li>
+                            <li data-speed="2">2</li>
+                        </div>
+                    </div>
+                    <div class="customRangePlaybackContainer">
+                        <ul>
+                            <img src="./assets/icons/Chevron-left.svg" alt="">
+                            <span>Custom</span>
+                        </ul>
+                        <p id="PlaybackRangeValue">1</p>
+                        <input type="range" min="25" max="200" value="100" step="5" id="rangeCustomPlayback">
+                    </div>
+
+
+                    else {
+                        customPlaybackStatus.style.display="block";
+                        customPlaybackStatus.textContent=cusPlayback;
+                        togglePlaybackStatus.textContent=cusPlayback;
+                        removePlaybackActiveClasses(playback);
+                        customPlaybackStatus.classList.add("active");
+                    }
+
+                    rangeProgress.addEventListener('input', function(){
+                        const time = (rangeProgress.value / 100) * mainVideo.duration;
+                        mainVideo.currentTime = time;
+                    });
+                    rangeProgress.oninput = function(){
+                        progressShadow.style.width = rangeProgress.value + "%";
+                    }
+                    rangeProgress.value = proggres;
+
+                    playback.forEach(playback => {
+                        playback.addEventListener("click", () => {
+                        removeActiveClasses(playback);
+                        playback.classList.add("active");
+                      });
+                    });
+                    function removeActiveClasses() {
+                        playback.forEach(playback => {
+                            playback.classList.remove("active");
+                        })
+                    }
+
+
+                    mainVideo.addEventListener('timeupdate', function() {
+                        const proggres = (mainVideo.currentTime / mainVideo.duration) * 100;
+                        rangeProgress.value = proggres;
+                        progressShadow.style.width = proggres + "%";
+                    });
+                    rangeProgress.addEventListener('input', function(){
+                        const time = (rangeProgress.value / 100) * mainVideo.duration;
+                        mainVideo.currentTime = time;
+                    });
+                    rangeProgress.oninput = function(){
+                        progressShadow.style.width = rangeProgress.value + "%";
+                    }
+
+
+                    settingsBtn 
+                    settings 
+                    settingHome 
+                    
+                    captions 
+                    caption_labels 
+
+
+
+
+
+
+
+
+
+                    auto_play.addEventListener("click", () => {
+                        auto_play.classList.toggle("active");
+                        if (auto_play.classList.contains("active")) {
+                          auto_play.title = "Autoplay is on";
+                        } else {
+                          auto_play.title = "Autoplay is off";
+                        }
+                      });
+
+
+
+
+
+
+
+
+

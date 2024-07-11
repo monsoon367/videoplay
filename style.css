@@ -16,19 +16,14 @@ body {
     height: 800vh;
     flex-direction: column;
     overflow: auto;
+    scrollbar-width: none;
 }
-.videoContainer::-webkit-scrollbar {
-    width: 0;
-    background: none;
-}
-
 .container {
     display: flex;
     position: relative;
     justify-content: center;
     width: auto;
     height: auto;
-    background: #ffffff;
 }
 
 .videoPlayer {
@@ -230,7 +225,7 @@ body {
 
 
 .controllersMobile {
-    display: none;
+    display: block;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -280,6 +275,7 @@ body {
     align-items: center;
     text-align: center;
     background: rgba(0, 0, 0, 0.368);
+    border-radius: 50%;
     height: 80px;
     width: 80px;
     border: none;
@@ -299,7 +295,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding-top: 16px;
+    padding-top: 12px;
     height: 50px;
     width: 100%;
     z-index: 9;
@@ -376,14 +372,26 @@ body {
 }
 /*progressContainer finnish*/
 
-.controllers .icon {
+.leftControllers .icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: 2s;
+}
+.rightControllers .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-left: 7px;
+    margin-right: 7px;
     user-select: none;
     -webkit-user-select: none;
     transition: 2s;
@@ -402,6 +410,8 @@ body {
     border: none;
     background: none;
     cursor: pointer;
+    height: 30px;
+    width: 30px;
     -webkit-tap-highlight-color: transparent;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -440,6 +450,9 @@ body {
 #volumeRange {
     -webkit-appearance: none;
     appearance: none;
+    margin: auto;
+    width: 0%;
+    overflow: visible;
     height: 3px;
     width: 0px;
     opacity: 1;
@@ -451,24 +464,73 @@ body {
 }
 #volumeRange::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
-    height: 12px;
     width: 12px;
+    height: 12px;
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     opacity: 0;
-    transition: 0.3s;
-    background-color: #ffffff;
-    cursor: pointer;
+    transition: 150ms;
+}
+#volumeRange::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: rgb(255, 255, 255);
+    border: none;
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0;
+    transition: 200ms;
 }
 .icon:hover #volumeRange,
 #volumeRange:focus-within{
-    display: inline-block;
+    display: block;
     width: 60px;
 }
 .icon:hover #volumeRange::-webkit-slider-thumb,
 #volumeRange:focus-within::-webkit-slider-thumb {
     opacity: 1;
 }
+.icon:hover #volumeRange::-moz-range-thumb,
+#volumeRange:focus-within::-moz-range-thumb {
+    opacity: 1;
+    scale: 1;
+}
+
+.icon .auto-play {
+    width: 30px;
+    height: 10px;
+    border-radius: 20px;
+    position: relative;
+    margin-right: 8px !important;
+    background: #b6b6b6;
+  }
+.icon .auto-play::before {
+    content: '\e034';
+    font-family: "material symbols outlined";
+    
+    width: 17px;
+    height: 17px;
+    font-size: 14px;
+    background: #727272;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    font-style: normal;
+    filter: invert(0%);
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.icon .auto-play.active::before {
+    content: "\e037";
+    font-family: "material symbols outlined";
+    filter: invert(100%);
+    left: 15px;
+    background: #000000;
+  }
 
 /*timer*/
 .timer {
@@ -493,40 +555,80 @@ body {
     width: 28px;
 }
 
-#fullscreen {
-    transition: 2s;
-}
+
 
 .settingsContainer {
+    display: none;
     position: absolute;
     right: 25px;
     bottom: 62px;
-    width: auto;
-    height: auto;
+    width: 300px;
+    height: 230px;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     background: rgb(28 28 28 /90%);
+    border-radius: 10px;
     z-index: 11;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition: 150ms;
 }
-
+.scOpen {
+    display: flex;
+}
+.scQualityWHa {
+    width: 250px;
+    height: 250px;
+}
+.scPlaybackWHa {
+    width: 240px;
+    height: 250px;
+}
+.scPlaybackRangeWHa {
+    width: 240px;
+    height: 130px;
+}
+/*mainSettings*/
 .mainSettings {
-    display: none;
-    opacity: 0;
+    visibility: visible;
+    display: block;
+    opacity: 1;
     position: relative;
     width: 300px;
-    height: auto;
+    height: 280px;
 }
-.settingButton li {
-    display: flex;
-    position: relative;
+.settingList {
+    visibility: visible;
+    display: block;
+    position: absolute;
     width: 100%;
+    height: 100%;
+    right: 0%;
+    transition: 150ms ease-in-out;
+    padding: 5px;
+}
+.setButToLeft {
+    visibility: hidden;
+    right: 100%;
+}
+
+.settingList li {
+    display: flex;
+    margin: auto;
+    position: relative;
     cursor: pointer;
-    text-align: left;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    font-size: 14px;
     padding: 12px;
     font-size: 14px;
 }
-.settingButton li:hover {
-    background: rgba(21, 21, 21, 0.9);
+.settingList li:hover {
+    background: rgba(255, 0, 0, 0.9);
     border: 2px rgba(21, 21, 21, 0.9);
     transition: 150ms all;
 }
@@ -539,7 +641,6 @@ body {
     left: 0;
     justify-content: left;
     text-align: left;
-
 }
 .settingsTextContainer .sBtnR {
     justify-content: end;
@@ -559,43 +660,61 @@ body {
     margin-left: 5px;
 }
 
-.playbackSpeed {
-    display: block;
-    opacity: 1;
-    position: relative;
-    width: 210px;
-    height: 250px;
+#volumeRange:focus {
+    outline-offset: 5px;
+}
+
+
+
+/*qualityList*/
+.qualityList {
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 300px;
     overflow: auto;
+    right: -100%;
+    transition: 150ms ease-in-out;
 }
-.playbackSpeed::-webkit-scrollbar {
-    width: 15px;
-    background: none;
+.qualityListOpen {
+    visibility: visible;
+    right: 0%;
 }
-.playbackSpeed::-webkit-scrollbar-thumb {
-    height: 30px;
-    border: 2px solid transparent;
-    background: rgba(83, 83, 83, 0.9);
-    cursor: pointer;
-}
-.playback span {
-    display: block;
+.qualityList span {
+    display: flex;
+    position: relative;
+    border: 1px solid rgb(83, 83, 83);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
     font-size: 14px;
     font-weight: 300px;
     text-align: center;
     padding: 15px 0px;
-    border: 1px solid rgb(83, 83, 83);
 }
-.playback ul {
+.qualityList span img {
+    filter: invert(100%);
+    width: 13px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.qualityList span img:focus {
+    outline-offset: 3px;
+}
+.qualityList ul {
     position: relative;
+    padding: 5px;
 }
-.playback li {
+.qualityList li {
     position: relative;
     width: 100%;
+    height: 40px;
     font-size: 14px;
     padding: 12px 33px;
     cursor: pointer;
 }
-.playback li.active::before {
+.qualityList li.active::before {
     content: '\e876';
     font-family: "material symbols outlined";
     position: absolute;
@@ -605,9 +724,143 @@ body {
     padding-right: 10px;
     font-size: 18px;
 }
-
-.playback li:hover {
-    background: rgba(21, 21, 21, 0.9);
+.qualityList li:hover {
+    background: rgba(255, 0, 0, 0.9);
     border: 2px rgba(21, 21, 21, 0.9);
     transition: 150ms all;
+}
+/*playbackSpeed*/
+.playbackList {
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    overflow: auto;
+    right: -100%;
+    transition: 150ms ease-in-out;
+}
+.playListOpen {
+    visibility: visible;
+    right: 0%;
+}
+.playListToLeft {
+    visibility: hidden;
+    right: 100%;
+}
+.playbackList ul {
+    display: flex;
+    position: relative;
+    border: 1px solid rgb(83, 83, 83);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    padding: 15px 0px;
+}
+.playbackList span {
+    display: block;
+    font-size: 14px;
+    font-weight: 300px;
+    text-align: center;
+}
+.playbackList ul img {
+    filter: invert(100%);
+    width: 13px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.playbackList ul img:focus {
+    outline-offset: 3px;
+}
+#customLinkRangePlayback {
+    right: 5px;
+    margin-left: 20px;
+    cursor: pointer; 
+    text-decoration: underline;
+}
+#customLinkRangePlayback:focus {
+    outline-offset: 3px;
+}
+
+.playbackBtnList {
+    padding: 5px;
+}
+.playbackList li {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding: 12px 33px;
+    cursor: pointer;
+}
+.playbackList li.active::before {
+    content: '\e876';
+    font-family: "material symbols outlined";
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 10px;
+    font-size: 18px;
+}
+.playbackList li:hover {
+    background: rgba(255, 0, 0, 0.9);
+    border: 2px rgba(21, 21, 21, 0.9);
+    transition: 150ms all;
+}
+#customPlaybackStatus {
+    display: none;
+}
+
+.customRangePlayback {
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: -100%;
+    transition: 150ms ease-in-out;
+}
+.cusRangePlaybackOpen {
+    visibility: visible;
+    right: 0;
+}
+#rangeCustomPlayback {
+    display: flex;
+    position: relative;
+    margin: auto;
+    width: 80%;
+    margin-bottom: 12px;
+    accent-color: rgb(196, 196, 196);
+    cursor: pointer;
+}
+
+.customRangePlayback ul {
+    display: flex;
+    position: relative;
+    border: 1px solid rgb(83, 83, 83);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    padding: 15px 0px;
+}
+.customRangePlayback span {
+    display: block;
+    font-size: 14px;
+    font-weight: 300px;
+    text-align: center;
+}
+.customRangePlayback ul img {
+    filter: invert(100%);
+    width: 13px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.customRangePlayback ul img:focus {
+    outline-offset: 3px;
+}
+#PlaybackRangeValue {
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
 }
