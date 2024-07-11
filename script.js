@@ -275,10 +275,12 @@ videoPlayer.classList.contains("fulscreenCustom");
       fullscreenIcon.src = "./assets/icons/Fullscreen-icon.svg"
       fullscreenIcon.title = "Enter Fullscreen"
       videoPlayer.classList.remove("fulscreenCustom");
+      videoPlayer.classList.remove("fulscreenMobileCustom");
     } else {
       fullscreenIcon.src = "./assets/icons/Fullscreen-Exit-icon.svg"
       fullscreenIcon.title = "Exit Fullscreen"
       videoPlayer.classList.add("fulscreenCustom");
+      videoPlayer.classList.add("fulscreenMobileCustom");
     }
 });
 
