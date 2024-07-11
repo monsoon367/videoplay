@@ -49,17 +49,8 @@ body {
     aspect-ratio: 6 / 1;
     z-index: 1;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
-  }
- 
-.videoPlayer:hover .controllersMobile,
-.videoPlayer.paused .controllersMobile,
-.videoPlayer:hover::before,
-.videoPlayer.paused::before,
-.videoPlayer:hover .controllers,
-.videoPlayer.paused .controllers {
     opacity: 1;
+    transition: opacity 150ms ease-in-out;
 }
 
 #mainVideo {
@@ -271,8 +262,8 @@ body {
     text-align: center;
     background: rgba(0, 0, 0, 0.368);
     border-radius: 50%;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -283,19 +274,21 @@ body {
     display: flex;
     margin: auto;
     filter: invert(100%);
-    width: 40px;
+    width: 30px;
 }
 
 .controllers {
     position: absolute;
-    bottom: 0;
+    bottom: -50px;
     left: 0;
     padding-top: 11px;
     height: 50px;
     width: 100%;
     z-index: 9;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
+    transition: 150ms ease-in-out;
+}
+.controllers.active {
+    bottom: 0px;
 }
 
 /*progressContainer start*/
@@ -499,10 +492,12 @@ body {
     margin-right: 8px !important;
     background: #b6b6b6;
   }
+  .icon .auto-play:focus {
+    outline-offset: 10px;
+  }
 .icon .auto-play::before {
     content: '\e034';
     font-family: "material symbols outlined";
-    
     width: 17px;
     height: 17px;
     font-size: 14px;
@@ -659,14 +654,12 @@ body {
     outline-offset: 5px;
 }
 
-
-
 /*qualityList*/
 .qualityList {
     visibility: hidden;
     position: absolute;
     width: 100%;
-    height: 300px;
+    height: 250px;
     overflow: auto;
     right: -100%;
     transition: 150ms ease-in-out;
@@ -863,7 +856,7 @@ body {
 @media (max-width: 1024px) {
     .videoPlayer {
         display: flex;
-        position: relative;
+        position: fixed;
         width: 100%;
         height: auto;
         border-radius: 0px;
@@ -874,6 +867,20 @@ body {
         -moz-user-select: none;
         -ms-user-select: none;
     }
+
+    /*MainProgresBuffer*/
+    .progressBarBufBg {
+        height: 2px;
+    }
+    .progressBuffer {
+        height: 2px;
+    }
+    /*MainProgresShadow*/
+    .progressShadow {
+        height: 2px;
+    }
+    /*progressContainer finnish*/
+
     .fulscreenMobileCustom {
         width: 100%;
         height:100vh;
@@ -891,11 +898,13 @@ body {
         -webkit-user-select: none;
     }
 
+    .controllers .icon img {
+        width: 15px;
+    }
+
     #volumeRange {
         display: none;
     }
-
-
     .controllersMobile {
         display: block;
     }
@@ -917,6 +926,7 @@ body {
     .timer {
         position: absolute;
         left: 8px;
+        font-size: 12px;
     }
 
 

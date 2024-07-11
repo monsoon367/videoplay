@@ -11,10 +11,11 @@
     <div class="videoContainer">
         <div class="container">
             <div class="videoPlayer paused">
-                <video preload="metadata" id="mainVideo">
-                    <source src="./jojo.mp4" size="360" type="video/mp4" id="deafultVideo">
-                    <source src="./jojo.mp4" size="480" type="video/mp4">
-                    <source src="./jojo.mp4" size="1080" type="video/mp4">
+                <video preload="metadata" id="mainVideo" autoplay>
+                    <source src="./VID-20240610-WA0006.mp4" size="360" type="video/mp4">
+                    <source src="./VID-20240610-WA0006.mp4" size="480" type="video/mp4">
+                    <source src="./VID-20240610-WA0006.mp4" size="720" type="video/mp4">
+                    <source src="./VID-20240610-WA0006.mp4" size="1080" type="video/mp4">
                 </video>
                 <!--controller-->
                 <div class="popupElementContainer">
@@ -85,7 +86,7 @@
                         
                         <div class="rightControllers">
                             <span class="icon">
-                                <i class="auto-play"></i>
+                                <i class="auto-play" tabindex="0" role="button"></i>
                               </span>
                             <span class="icon">
                                 <button id="captiom"><img draggable="false" title="Settings" src="./assets/icons/Caption-icon.svg" id="captionIcon"></button>
@@ -133,7 +134,7 @@
                                     Playback Quality 
                                 </span>
                                 <ul>
-                                  <li data-quality="360p" class="active" tabindex="0" role="button" id="deafultQuality">Auto (360p)</li>
+                                  <li data-quality="360" class="active" tabindex="0" role="button" id="deafultQuality">Auto (360p)</li>
                                 </ul>
                             </div>
 

@@ -8,10 +8,11 @@ videoPlayer.forEach(videoPlayer => {
 
     videoPlayer.innerHTML=videoPlayer_html;
 
-
+    
 //sellect all require tags
 const mainVideo=videoPlayer.querySelector('#mainVideo'),
 mainVideoClickF=videoPlayer.querySelector('.mainVideoClickF'),
+controllers=videoPlayer.querySelector('.controllers'),
 
 fullscreen=videoPlayer.querySelector('#fullscreen'),
 fullscreenIcon=videoPlayer.querySelector('#fullscreenIcon'),
@@ -117,6 +118,7 @@ mainVideo.addEventListener('ended' ,myHandler,false);
         playPauseIcon.src = "./assets/icons/Replay-icon.svg";
         playPauseMobileIcon.src = "./assets/icons/Replay-icon.svg";
     };
+
 function togglePlay(){
     mainVideo.paused ? mainVideo.play() : mainVideo.pause();
 };
@@ -299,6 +301,16 @@ autoplay.addEventListener("click", () => {
         autoplay.title = "Autoplay is off";
     }
   });
+mainVideo.addEventListener("ended", () => {
+    if (autoplay.classList.contains("active")) {
+      mainVideo.play();
+    } else {
+      playPause.src = "./assets/icons/Replay-icon.svg";
+      playPause.title = "Replay";
+    }
+});
+
+
 
 function toggleSettingCloseAll() {
     settingsContainer.classList.remove("scOpen");
@@ -379,7 +391,10 @@ const quality_li = videoPlayer.querySelectorAll(".settingsContainer [data-label=
       let quality = event.getAttribute('data-quality');
       removeActiveClasses(quality_li);
       event.classList.add('active');
-      deafultQuality.style.display="none";
+
+      deafultQuality.addEventListener('click',() => {
+        qualityStatus.textContent = `Auto 360p`;
+      })
 
 
       qualitys.forEach(event => {
@@ -445,6 +460,24 @@ function removePlaybackActiveClasses() {
         playback.classList.remove("active");
     })
 }
+
+let timer;
+const hideControlss = () => {
+    if (mainVideo.paused) return;
+    timer = setTimeout(() => {
+        if (settingsContainer.classList.contains("scOpen")) {
+            controllers.classList.add('active');
+        } else {
+            controllers.classList.remove('active');
+        }
+    },3000)
+};
+
+videoPlayer.addEventListener('mousemove',() => {
+    controllers.classList.add('active');
+    clearTimeout(timer);
+    hideControlss();
+});
 
 
 
