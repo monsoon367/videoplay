@@ -12,8 +12,6 @@ body {
 
 .videoContainer {
     display: flex;
-    width: 100%;
-    height: 800vh;
     flex-direction: column;
     overflow: auto;
     scrollbar-width: none;
@@ -22,8 +20,6 @@ body {
     display: flex;
     position: relative;
     justify-content: center;
-    width: auto;
-    height: auto;
 }
 
 .videoPlayer {
@@ -79,6 +75,19 @@ body {
     -webkit-user-select: none;
 }
 
+.mainVideoClickF {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+}
+
+/*popupElementContainer*/
 .popupElementContainer {
     position: absolute; 
     top: 0;
@@ -209,23 +218,9 @@ body {
     transition: opacity 150ms ease-in-out;
 }
 
-
-.mainVideoClickF {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height:100%;
-    display: block;
-    width: 100%;
-    height: 100%;
-    z-index: 7;
-    background: rgba(0, 173, 118, 0);
-}
-
-
+/*Mobile*/
 .controllersMobile {
-    display: block;
+    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -288,14 +283,14 @@ body {
     display: flex;
     margin: auto;
     filter: invert(100%);
-    width: 50px;
+    width: 40px;
 }
 
 .controllers {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding-top: 12px;
+    padding-top: 11px;
     height: 50px;
     width: 100%;
     z-index: 9;
@@ -863,4 +858,83 @@ body {
     padding: 14px;
     text-align: center;
     font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .videoContainer {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        scrollbar-width: none;
+    }
+    .videoPlayer {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-radius: 0px;
+        background-color: rgb(0, 0, 0);
+        overflow: hidden;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    #mainVideo {
+        display: flex;
+        margin: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border-radius: 0px;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    #volumeRange {
+        display: none;
+    }
+
+
+    .controllersMobile {
+        display: block;
+    }
+    #fastRewind {
+        display: none;
+    }
+    #fastForward {
+        display: none;
+    }
+    #playPause {
+        display: none;
+    }
+    #volumeBtn {
+        display: none;
+    }
+    #pictureInPicture {
+        display: none;
+    }
+    .timer {
+        position: absolute;
+        left: 8px;
+    }
+
+
+    .auto-play {
+        display: none;
+    }
+
+    #captiom {
+        display: none;
+    }
+
+    #setting {
+        display: none;
+    }
+
+
+
+
 }

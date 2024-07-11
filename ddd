@@ -319,9 +319,24 @@ divmain
                     captions 
                     caption_labels 
 
+                    width: 848px;
+                    height: 478px;
 
 
-
+                    .controllers {
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        background: rgba(255, 0, 0, 0.21);
+                    }
+                
+                    .progressContainer {
+                        width: 100%;
+                        position: absolute;
+                        z-index: 10;
+                        top: -100%;
+                        transform: translateY(100%);
+                    }
 
 
 
