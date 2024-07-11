@@ -861,12 +861,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-    .videoContainer {
-        display: flex;
-        flex-direction: column;
-        overflow: auto;
-        scrollbar-width: none;
-    }
     .videoPlayer {
         display: flex;
         position: relative;
@@ -879,6 +873,11 @@ body {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
+    }
+    .fulscreenCustom {
+        width: 100%;
+        height:100vh;
+        border-radius: 0px;
     }
     #mainVideo {
         display: flex;
