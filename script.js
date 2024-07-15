@@ -427,9 +427,6 @@ function toggleFullscreen() {
     if (!document.fullscreenElement) {
         videoContainer.requestFullscreen();
         screen.orientation.lock("landscape-primary");
-        if (mainVideo.paused) return;
-        controllers.classList.remove('active');
-        controllersMobile.classList.remove('active');
       }else{
         document.exitFullscreen();
         screen.orientation.unlock();
