@@ -892,13 +892,36 @@ body {
         -moz-user-select: none;
         -ms-user-select: none;
     }
+
+    .controllers {
+        position: absolute;
+        bottom: 0px;
+        opacity: 0;
+        pointer-events: none;
+        left: 0;
+        padding-top: 0px;
+        height: 60px;
+        width: 100%;
+        z-index: 9;
+        transition: 150ms ease-in-out;
+    }
+    
     .controllers.active::before {
         opacity: 0;
+    }
+
+    .progressContainer {
+        width: 100%;
+        position: absolute;
+        z-index: 10;
+        top: 65%;
+        transform: translateY(-65%);
     }
 
     /*MainProgresBuffer*/
     .progressBarBufBg {
         height: 2px;
+        width: 85%;
     }
     .progressBuffer {
         height: 2px;
@@ -907,6 +930,7 @@ body {
     .progressShadow {
         height: 2px;
     }
+
     /*progressContainer finnish*/
 
     .fulscreenMobileCustom {

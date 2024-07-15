@@ -350,6 +350,17 @@ fastForward.addEventListener('mouseover',() => {
 });
 
 
+.progressBarBufBg {
+    position: relative;
+    margin: auto;
+    width: 98%;
+    height: 4px;
+    background: #f0f0f063;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 mainVideoLeftMinorSensor.addEventListener('mousemove',() => {
     if (mainVideo.paused) return;
     controllers.classList.remove('active');
