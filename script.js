@@ -539,6 +539,12 @@ controllers.addEventListener('mouseover',() => {
     hideControlss();
 })
 
+controllersMobile.addEventListener('mousemove',() => {
+    controllers.classList.add('active');
+    controllersMobile.classList.add('active');
+    clearTimeout(timer);
+    hideControlss();
+});
 
 mainVideoClickF.addEventListener('mousemove',() => {
     controllers.classList.add('active');
