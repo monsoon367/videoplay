@@ -66,7 +66,7 @@ body {
     width: 100%;
     height:100%;
     display: block;
-    z-index: 7;
+    z-index: 6;
 }
 .mainVideoLeftMinorSensor {
     display: none;
@@ -75,7 +75,7 @@ body {
     left: 0;
     width: 1%;
     height:100%;
-    z-index: 20;
+    z-index: 7;
 }
 .mainVideoLeftMinorSensor.active {
     display: block;
@@ -288,6 +288,7 @@ body {
     bottom: 0px;
     opacity: 0;
     pointer-events: none;
+    touch-action: none;
     left: 0;
     padding-top: 11px;
     height: 50px;
@@ -304,6 +305,7 @@ body {
     aspect-ratio: 6 / 1;
     z-index: 1;
     pointer-events: none;
+    touch-action: none;
     opacity: 1;
 }
 .controllers.active {
@@ -328,27 +330,7 @@ body {
     width: 100%;
     height: 15px;
 }
-#rangeProgress {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: auto;
-    width: 99%;
-    background: transparent;
-    cursor: pointer;
-    border: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-#rangeProgress::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    background: rgb(255, 0, 0);
-    box-shadow: 0px 0px 0px 2px red;
-    border-radius: 50%;
-    scale: 1;
-    transition: 150ms all;
-}
+
 /*MainProgresBuffer*/
 .progressBarBufBg {
     position: relative;
@@ -390,7 +372,6 @@ body {
     margin-right: 4px;
     user-select: none;
     -webkit-user-select: none;
-    transition: 2s;
 }
 .rightControllers .icon {
     display: inline-flex;
@@ -402,7 +383,6 @@ body {
     margin-right: 7px;
     user-select: none;
     -webkit-user-select: none;
-    transition: 2s;
 }
 .controllers .icon img {
     display: flex;
@@ -432,7 +412,7 @@ body {
     align-items: center;
     margin: auto;
     width: 98%;
-    z-index: 100;
+    z-index: 9;
 }
 .controllers .listControllers .leftControllers,
 .controllers .listControllers .rightControllers {
@@ -892,18 +872,26 @@ body {
         -moz-user-select: none;
         -ms-user-select: none;
     }
+    .fulscreenMobileCustom {
+        width: 100%;
+        height:100vh;
+    }
+    #mainVideo {
+        display: flex;
+        margin: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border-radius: 0px;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none;
+    }
 
     .controllers {
-        position: absolute;
-        bottom: 0px;
-        opacity: 0;
-        pointer-events: none;
-        left: 0;
         padding-top: 0px;
         height: 60px;
-        width: 100%;
-        z-index: 9;
-        transition: 150ms ease-in-out;
     }
     
     .controllers.active::before {
@@ -913,7 +901,6 @@ body {
     .progressContainer {
         width: 100%;
         position: absolute;
-        z-index: 10;
         top: 65%;
         transform: translateY(-65%);
     }
@@ -933,22 +920,6 @@ body {
 
     /*progressContainer finnish*/
 
-    .fulscreenMobileCustom {
-        width: 100%;
-        height:100vh;
-    }
-    #mainVideo {
-        display: flex;
-        margin: auto;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        outline: none;
-        border-radius: 0px;
-        pointer-events: none;
-        user-select: none;
-        -webkit-user-select: none;
-    }
 
     .controllers .icon img {
         width: 15px;
@@ -977,7 +948,8 @@ body {
     }
     .timer {
         position: absolute;
-        left: 8px;
+        top: 8px;
+        left: 15px;
         font-size: 12px;
     }
 
@@ -994,6 +966,12 @@ body {
 
     #setting {
         display: none;
+    }
+
+    #fullscreen {
+        position: absolute;
+        top: 0;
+        right: 15px;
     }
 
 

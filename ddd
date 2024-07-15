@@ -349,6 +349,27 @@ fastForward.addEventListener('mouseover',() => {
     controllersMobile.classList.add('active');
 });
 
+#rangeProgress {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: auto;
+    width: 99%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+#rangeProgress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: rgb(255, 0, 0);
+    box-shadow: 0px 0px 0px 2px red;
+    border-radius: 50%;
+    scale: 1;
+    transition: 150ms all;
+}
 
 .progressBarBufBg {
     position: relative;

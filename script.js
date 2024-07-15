@@ -433,9 +433,6 @@ function toggleFullscreen() {
       }else{
         document.exitFullscreen();
         screen.orientation.unlock();
-        if (mainVideo.paused) return;
-        controllers.classList.remove('active');
-        controllersMobile.classList.remove('active');
       }
 }
 fullscreen.addEventListener('click', toggleFullscreen);
