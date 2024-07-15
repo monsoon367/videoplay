@@ -35,22 +35,15 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
 }
-.fulscreenCustom {
+.videoPlayer.fulscreenCustom {
     width: 100%;
     height:100vh;
     border-radius: 0px;
 }
-.videoPlayer::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+.videoPlayer.theater {
     width: 100%;
-    aspect-ratio: 6 / 1;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 150ms ease-in-out;
+    min-height: 90vh;
+    border-radius: 0px;
 }
 
 #mainVideo {
@@ -73,9 +66,19 @@ body {
     width: 100%;
     height:100%;
     display: block;
-    width: 100%;
-    height: 100%;
     z-index: 7;
+}
+.mainVideoLeftMinorSensor {
+    display: none;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 1%;
+    height:100%;
+    z-index: 20;
+}
+.mainVideoLeftMinorSensor.active {
+    display: block;
 }
 
 /*popupElementContainer*/
@@ -220,6 +223,9 @@ body {
     opacity: 0;
     transition: opacity 150ms ease-in-out;
 }
+.controllersMobile.active {
+    opacity: 1;
+}
 .listMobileControllers {
     display: flex;
     position: relative;
@@ -279,7 +285,9 @@ body {
 
 .controllers {
     position: absolute;
-    bottom: -50px;
+    bottom: 0px;
+    opacity: 0;
+    pointer-events: none;
     left: 0;
     padding-top: 11px;
     height: 50px;
@@ -287,8 +295,20 @@ body {
     z-index: 9;
     transition: 150ms ease-in-out;
 }
+.controllers.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1;
+}
 .controllers.active {
-    bottom: 0px;
+    opacity: 1;
+    pointer-events: fill;
 }
 
 /*progressContainer start*/
@@ -520,7 +540,7 @@ body {
     filter: invert(100%);
     left: 15px;
     background: #000000;
-  }
+}
 
 /*timer*/
 .timer {
@@ -541,11 +561,13 @@ body {
     transform: rotate(45deg);
 }
 
-#pictureInPicture {
+#pictureInPictureIcon {
     width: 28px;
 }
 
-
+#theaterIcon {
+    width: 28px;
+}
 
 .settingsContainer {
     display: none;
@@ -854,6 +876,9 @@ body {
 }
 
 @media (max-width: 1024px) {
+    *, html {
+        scrollbar-width: none;
+    }
     .videoPlayer {
         display: flex;
         position: fixed;
@@ -866,6 +891,9 @@ body {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
+    }
+    .controllers.active::before {
+        opacity: 0;
     }
 
     /*MainProgresBuffer*/
@@ -929,12 +957,14 @@ body {
         font-size: 12px;
     }
 
-
     .auto-play {
         display: none;
     }
 
-    #captiom {
+    #caption {
+        display: none;
+    }
+    #theaterMode {
         display: none;
     }
 

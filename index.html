@@ -11,13 +11,14 @@
     <div class="videoContainer">
         <div class="container">
             <div class="videoPlayer paused">
-                <video preload="metadata" id="mainVideo" autoplay>
+                <video preload="metadata" id="mainVideo">
                     <source src="./VID-20240610-WA0006.mp4" size="360" type="video/mp4">
-                    <source src="./VID-20240610-WA0006.mp4" size="480" type="video/mp4">
+                    <source src="./josuke.mp4" size="480" type="video/mp4">
                     <source src="./VID-20240610-WA0006.mp4" size="720" type="video/mp4">
                     <source src="./VID-20240610-WA0006.mp4" size="1080" type="video/mp4">
                 </video>
                 <!--controller-->
+                <div class="mainVideoLeftMinorSensor"></div>
                 <div class="popupElementContainer">
                     <div class="popupElement">
                         <div class="blockLeft">
@@ -43,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="controllersMobile">
+                <div class="controllersMobile active">
                     <div class="listMobileControllers">
                         <div class="blockRewind"></div>
                         <div class="blockCenter">
@@ -55,7 +56,8 @@
                     </div>
                 </div>
                 <div class="mainVideoClickF"></div>
-                <div class="controllers">
+                
+                <div class="controllers active">
                     <div class="progressContainer">
                         <div id="MainProgresInput">
                             <div class="progressBarBufBg" tabindex="-1">
@@ -86,16 +88,19 @@
                         
                         <div class="rightControllers">
                             <span class="icon">
-                                <i class="auto-play" tabindex="0" role="button"></i>
+                                <i class="auto-play" tabindex="0" role="button" title="Autoplay is off"></i>
                               </span>
                             <span class="icon">
-                                <button id="captiom"><img draggable="false" title="Settings" src="./assets/icons/Caption-icon.svg" id="captionIcon"></button>
+                                <button id="caption"><img draggable="false" title="Settings" src="./assets/icons/Caption-icon.svg" id="captionIcon"></button>
                             </span>
                             <span class="icon">
                                 <button id="setting"><img draggable="false" title="Settings" src="./assets/icons/Setting-icon.svg" id="settingIcon"></button>
                             </span>
                             <span class="icon">
-                                <button id="pictureInPicture"><img draggable="false" title="Picture In Picture" src="./assets/icons/PictureInPicture.svg" id="pictureInPicture"></button>
+                                <button id="pictureInPicture"><img draggable="false" title="Picture In Picture" src="./assets/icons/PictureInPicture.svg" id="pictureInPictureIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="theaterMode"><img draggable="false" title="Theater Mode" src="./assets/icons/TheaterMode.svg" id="theaterIcon"></button>
                             </span>
                             <span class="icon">
                                 <button id="fullscreen"><img draggable="false" title="Fullscreen" src="./assets/icons/Fullscreen-icon.svg" id="fullscreenIcon"></button>

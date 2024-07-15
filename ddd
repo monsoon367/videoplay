@@ -322,6 +322,41 @@ divmain
                     width: 848px;
                     height: 478px;
 
+                    autoplay.onmouseover = volumeBtn.onmouseout = handler;
+caption.onmouseover = caption.onmouseout = handler;
+pictureInPicture.onmouseover = pictureInPicture.onmouseout = handler;
+fullscreen.onmouseover = fullscreen.onmouseout = handler;
+
+                    
+videoPlayer.addEventListener('mousemove', toggleControllerActive);
+
+playPause.addEventListener('click', toggleControllerActive);
+
+buttonControllers.addEventListener('click', toggleControllerActive);
+
+playPauseMobile.addEventListener('click', toggleControllerActive);
+
+fastRewind.addEventListener('click', toggleControllerActive);
+fastForward.addEventListener('click', toggleControllerActive);
+
+
+fastRewind.addEventListener('mouseover',() => {
+    controllers.classList.add('active');
+    controllersMobile.classList.add('active');
+});
+fastForward.addEventListener('mouseover',() => {
+    controllers.classList.add('active');
+    controllersMobile.classList.add('active');
+});
+
+
+mainVideoLeftMinorSensor.addEventListener('mousemove',() => {
+    if (mainVideo.paused) return;
+    controllers.classList.remove('active');
+    controllersMobile.classList.remove('active');
+});
+mainVideoLeftMinorSensor=videoPlayer.querySelector('.mainVideoLeftMinorSensor'),
+mainVideoClickF.addEventListener('click', togglePlay);
 
                     .controllers {
                         position: absolute;
