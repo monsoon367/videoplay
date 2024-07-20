@@ -12,7 +12,7 @@
 </div>
   
   
-  
+      const captionLaabel = videoPlayer.querySelectorAll("track label");
   const settingDivs = video_player.querySelectorAll('.settings > div');
   const settingBack = video_player.querySelectorAll('.settings > div .back_arrow');
   const quality_ul = video_player.querySelector(".settings > [data-label='quality'] ul");

@@ -51,8 +51,24 @@
                                 background: rgba(83, 83, 83, 0.9);
                                 border-radius: 20px;
                             }
+                            .headerControllers {
+                                display: flex;
+                                visibility: hidden;
+                                opacity: 1;
+                                pointer-events: fill;
+                                touch-action: none;
+                            }
 
+                            canvas=videoPlayer.querySelector('#canvas'), 
+ctx=canvas.getContext("2d")
 
+                            canvas.style.width = mainVideo.clientWidth + "px";
+                            canvas.style.width = mainVideo.clientHeight + "px";
+                            
+                            function getCurrentImage() {
+                                ctx.drawImage(mainVideo, 0, 0, canvas.width, canvas.height);
+                            }
+                            setInterval(getCurrentImage, 100);
 
                             <span>Playback Speed</span>
                             <li  value="0.25">0.25</li>
@@ -64,6 +80,33 @@
                             <li  value="1.75">1.75</li>
                             <li  value="2">2</li>
 
+                            if (event.getAttribute('size') == quality) {
+                                let video_current_duration = mainVideo.currentTime;
+                                let video_source = event.getAttribute('src');
+                                qualityStatus.textContent = `${quality}p`;
+                                mainVideo.src = video_source;
+                                mainVideo.currentTime = video_current_duration;
+                                mainVideo.play()
+                              }
+
+                              removeActiveClasses(caption);
+                              event.classList.add("active");
+                              changeCaption(event);
+                              caption_text.innerHTML = "";
+                              CaptionStatus.textContent=`${event.getAttribute('label')}`;
+
+                              if (tracks.length != 0) {
+                                caption_labels.insertAdjacentHTML(
+                                  "afterbegin",
+                                  `<li data-track="OFF" class="active">OFF</li>`
+                                );
+                                for (let i = 0; i < tracks.length; i++) {
+                                  let trackLi = `<li data-track="${tracks[i].label}">${tracks[i].label}</li>`;
+                                  caption_labels.insertAdjacentHTML("beforeend", trackLi);
+                                }
+                            }
+
+                            <li data-track="English">Deafult (English)</li>
 
                             document.addEventListener("keydown", e => {
                                 const tagName = document.activeElement.tagName.toLowerCase()
@@ -370,6 +413,138 @@ fastForward.addEventListener('mouseover',() => {
     scale: 1;
     transition: 150ms all;
 }
+
+.fullscreenTitle {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+}
+#captionMobile {
+    position: absolute;
+    top: 3px;
+    right: 50px;
+    font-size: 12px;
+}
+
+#settingMobile {
+    position: absolute;
+    top: 3px;
+    right: 15px;
+    font-size: 12px;
+}
+
+.headerControllers.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: fill;
+}
+
+.headerControllers {
+    display: flex;
+    pointer-events: none;
+    touch-action: none;
+    z-index: 10;
+}
+
+.headerControllers.activeFullscreen {
+    display: flex;
+}
+
+.headerControllers.activeFullscreen {
+    display: flex;
+}
+.headerControllers .icon img {
+    width: 15px;
+}
+
+.headerControllers {
+    position: absolute;
+    display: flex;
+    top: 0px;
+    opacity: 1;
+    pointer-events: none;
+    touch-action: none;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 9;
+    transition: 150ms ease-in-out;
+    background: red;
+}
+.headerControllers.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    z-index: 1;
+    pointer-events: none;
+    touch-action: none;
+    opacity: 1;
+}
+.headerControllers.active {
+    opacity: 1;
+    pointer-events: fill;
+}
+.headerControllers .headerListControllers .headerLeftControllers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headerListControllers {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 98%;
+    z-index: 9;
+    background: #000000;
+}
+.headerLeftControllers {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    white-space: nowrap;
+    color: white;
+    margin-left: 5px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.headerControllers img {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    width: 20px;
+    filter: invert(100%);
+}
+
+
+
+.headerControllers .headerListControllers .headerLeftControllers,
+.headerControllers .headerListControllers .headerRightControllers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+<span class="icon">
+    <i class="auto-play-mobile" tabindex="0" role="button" title="Autoplay is off"></i>
+  </span>
+<span class="icon">
+    <button id="captionMobile"><img draggable="false" title="Settings" src="./assets/icons/Caption-icon.svg" id="captionIcon"></button>
+</span>
+<span class="icon">
+    <button id="settingMobile"><img draggable="false" title="Settings" src="./assets/icons/Setting-icon.svg" id="settingIcon"></button>
+</span>
+
+user-select: none;
+    -webkit-user-select: none;
 
 .progressBarBufBg {
     position: relative;

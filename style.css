@@ -7,7 +7,7 @@
 }
 
 body {
-    background: rgb(0, 162, 255);
+    background: rgb(23, 23, 23);
 }
 
 .videoContainer {
@@ -15,11 +15,40 @@ body {
     flex-direction: column;
     overflow: auto;
     scrollbar-width: none;
+    background: rgb(23, 23, 23);
 }
 .container {
     display: flex;
     position: relative;
     justify-content: center;
+}
+
+video::cue {
+    opacity: 0;
+  }
+
+.caption_text {
+    position: absolute;
+    left: 50%;
+    bottom: 0%;
+    width: 90%;
+    max-width: 90%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    user-select: none;
+    transition: bottom 150ms;
+    pointer-events: none;
+    z-index: 100;
+}
+.caption_text.active {
+   bottom: 10%;
+ }
+
+.caption_text mark {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  background-color: #000000 !important;
+  color: #ffffff;
 }
 
 .videoPlayer {
@@ -46,18 +75,32 @@ body {
     border-radius: 0px;
 }
 
+
+
 #mainVideo {
     display: flex;
     margin: auto;
     position: relative;
-    width: auto;
+    width: 100%;
     height: 100%;
     outline: none;
     border-radius: 0px;
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
+    z-index: 3;
 }
+
+#canvas {
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(40px);
+    opacity: 0.5;
+    z-index: 1;
+  }
 
 .mainVideoClickF {
     position: absolute; 
@@ -220,10 +263,12 @@ body {
     height: 100%;
     z-index: 8;
     background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
     opacity: 0;
-    transition: opacity 150ms ease-in-out;
+    transition: 150ms ease-in-out;
 }
 .controllersMobile.active {
+    visibility: visible;
     opacity: 1;
 }
 .listMobileControllers {
@@ -283,9 +328,113 @@ body {
     width: 30px;
 }
 
+.headerControllers {
+    position: absolute;
+    display: none;
+    top: 0px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 9;
+    transition: 150ms ease-in-out;
+}
+.headerControllers.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    z-index: 1;
+    pointer-events: none;
+    touch-action: none;
+    opacity: 1;
+}
+.headerControllers.activeFullscreen {
+    display: flex;
+}
+.headerControllers.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: fill;
+}
+
+.headerLeftControllers {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-left: 4px;
+    margin-right: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.headerRightControllers .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-left: 7px;
+    margin-right: 7px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.headerControllers .icon img {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    width: 20px;
+    filter: invert(100%);
+}
+
+.headerControllers .icon button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.headerControllers .headerListControllers {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 98%;
+    z-index: 9;
+}
+.headerControllers .headerListControllers .headerLeftControllers,
+.headerControllers .headerListControllers .headerRightControllers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#captionMobile {
+    display: none;
+}
+
+#settingMobile {
+    display: none;
+}
+
 .controllers {
     position: absolute;
     bottom: 0px;
+    visibility: hidden;
     opacity: 0;
     pointer-events: none;
     touch-action: none;
@@ -303,12 +452,13 @@ body {
     background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
     width: 100%;
     aspect-ratio: 6 / 1;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
     touch-action: none;
     opacity: 1;
 }
 .controllers.active {
+    visibility: visible;
     opacity: 1;
     pointer-events: fill;
 }
@@ -384,6 +534,27 @@ body {
     user-select: none;
     -webkit-user-select: none;
 }
+
+.controllers .iconCustomForMobile img {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    width: 15px;
+    filter: invert(100%);
+}
+.iconCustomForMobile button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
 .controllers .icon img {
     display: flex;
     align-items: center;
@@ -548,6 +719,10 @@ body {
 #theaterIcon {
     width: 28px;
 }
+#fullscreenMobile {
+    display: none;
+    position: absolute;
+}
 
 .settingsContainer {
     display: none;
@@ -644,6 +819,7 @@ body {
     width: 20px;
     filter: invert(100%);
     margin-right: 12px;
+    
 }
 #settingsIconR {
     display: flex;
@@ -651,7 +827,6 @@ body {
     filter: invert(100%);
     margin-left: 5px;
 }
-
 #volumeRange:focus {
     outline-offset: 5px;
 }
@@ -855,6 +1030,74 @@ body {
     font-size: 14px;
 }
 
+
+.captionList {
+   visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    overflow: auto;
+    right: -100%;
+    transition: 150ms ease-in-out;
+}
+.captionListOpen {
+    visibility: visible;
+    right: 0%;
+}
+.captionList span {
+    display: flex;
+    position: relative;
+    border: 1px solid rgb(83, 83, 83);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 300px;
+    text-align: center;
+    padding: 15px 0px;
+}
+.captionList span img {
+    filter: invert(100%);
+    width: 13px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.captionList span img:focus {
+    outline-offset: 3px;
+}
+.captionList ul {
+    position: relative;
+    padding: 5px;
+}
+.captionList li {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding: 12px 33px;
+    cursor: pointer;
+}
+.captionList li.active::before {
+    content: '\e876';
+    font-family: "material symbols outlined";
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 10px;
+    font-size: 18px;
+}
+.captionList li:hover {
+    background: rgba(255, 0, 0, 0.9);
+    border: 2px rgba(21, 21, 21, 0.9);
+    transition: 150ms all;
+}
+
+
+
+
+
 @media (max-width: 1024px) {
     *, html {
         scrollbar-width: none;
@@ -894,6 +1137,17 @@ body {
         height: 60px;
     }
     
+    .headerControllers {
+        display: flex;
+        opacity: 1;
+        pointer-events: fill;
+        touch-action: none;
+    }
+
+    .headerControllers.active::before {
+        opacity: 0;
+    }
+
     .controllers.active::before {
         opacity: 0;
     }
@@ -901,8 +1155,8 @@ body {
     .progressContainer {
         width: 100%;
         position: absolute;
-        top: 65%;
-        transform: translateY(-65%);
+        top: 60%;
+        transform: translateY(-60%);
     }
 
     /*MainProgresBuffer*/
@@ -917,11 +1171,13 @@ body {
     .progressShadow {
         height: 2px;
     }
-
     /*progressContainer finnish*/
 
 
     .controllers .icon img {
+        width: 15px;
+    }
+    .headerControllers .icon img {
         width: 15px;
     }
 
@@ -952,27 +1208,47 @@ body {
         left: 15px;
         font-size: 12px;
     }
-
     .auto-play {
         display: none;
     }
-
-    #caption {
+    #captionBtn {
         display: none;
     }
     #theaterMode {
         display: none;
     }
-
     #setting {
         display: none;
     }
-
-    #fullscreen {
+    #fullscreenMobile {
+        display: block;
         position: absolute;
         top: 0;
         right: 15px;
     }
+    #fullscreen {
+        display: none;
+    }
+
+    .fullscreenTitle {
+        position: absolute;
+        left: 15px;
+    }
+    #captionMobile {
+        display: block;
+        position: absolute;
+        right: 50px;
+        font-size: 12px;
+    }
+    
+    #settingMobile {
+        display: block;
+        position: absolute;
+        right: 15px;
+        font-size: 12px;
+    }
+
+
 
 
 

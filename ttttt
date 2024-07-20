@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div class="videoContainer">
+        <div class="container">
+            <div class="videoPlayer paused">
+                <video preload="metadata" id="mainVideo" muted>
+                    <source src="./VID-20240610-WA0006.mp4" size="360" type="video/mp4">
+                    <source src="./josuke.mp4" size="480" type="video/mp4">
+                    <source src="./VID-20240610-WA0006.mp4" size="720" type="video/mp4">
+                    <source src="./VID-20240610-WA0006.mp4" size="1080" type="video/mp4">
+                </video>
+                <!--controller-->
+                <div class="mainVideoLeftMinorSensor"></div>
+                <div class="popupElementContainer">
+                    <div class="popupElement">
+                        <div class="blockLeft">
+                            <div class="rewindNotif">
+                                <p>-10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowLOne">&blacktriangleleft;</span><span class="arrowLTwo">&blacktriangleleft;</span><span class="arrowLThree">&blacktriangleleft;</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blockMiddle">
+                            <div class="twoTimeSpeedNotif">
+                                <p>2<span style="font-size: 10px;">X</span></p><div><p style="font-size: 30px; letter-spacing: -14px; line-height: 0.8;">&blacktriangleright;&blacktriangleright;</p></div>
+                            </div>
+                        </div>
+                        <div class="blockRight">
+                            <div class="forwardNotif">
+                                <p>10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowROne">&blacktriangleright;</span><span class="arrowRTwo">&blacktriangleright;</span><span class="arrowRThree">&blacktriangleright;</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="controllersMobile active">
+                    <div class="listMobileControllers">
+                        <div class="blockRewind"></div>
+                        <div class="blockCenter">
+                            <span class="iconMobile">
+                                <button  id="playPauseMobile"><img draggable="false"src="./assets/icons/Play-icon.svg" id="playPauseMobileIcon"></button>
+                            </span>
+                        </div>
+                        <div class="blockForward"></div>
+                    </div>
+                </div>
+                <div class="mainVideoClickF"></div>
+                
+                
+                <div class="controllers active">
+                    <div class="progressContainer">
+                        <div id="MainProgresInput">
+                            <div class="progressBarBufBg" tabindex="-1">
+                                <canvas class="progressBuffer" tabindex="-1"></canvas>
+                                <div class="progressShadow" tabindex="-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listControllers">
+                        <div class="leftControllers">
+                            <span class="icon">
+                                <button id="fastRewind"><img draggable="false" title="Rewind" src="./assets/icons/Rewind-icon.svg" id="fastRewindIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button  id="playPause"><img draggable="false" title="Play" src="./assets/icons/Play-icon.svg" id="playPauseIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="fastForward"><img draggable="false" title="Forward" src="./assets/icons/Forward-icon.svg" id="fastForwardIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="volumeBtn"><img draggable="false" title="Mute" src="./assets/icons/Volume-up-icon.svg" id="volumeBtnIcon"></button>
+                                <input type="range" min="0" max="100" step="1" value="100" id="volumeRange">
+                            </span>
+                            <div class="timer">
+                                <span class="current">0.00</span> / <span class="duration">0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rightControllers">
+                            <span class="icon">
+                                <i class="auto-play" tabindex="0" role="button" title="Autoplay is off"></i>
+                              </span>
+                            <span class="icon">
+                                <button id="caption"><img draggable="false" title="Settings" src="./assets/icons/Caption-icon.svg" id="captionIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="setting"><img draggable="false" title="Settings" src="./assets/icons/Setting-icon.svg" id="settingIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="pictureInPicture"><img draggable="false" title="Picture In Picture" src="./assets/icons/PictureInPicture.svg" id="pictureInPictureIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="theaterMode"><img draggable="false" title="Theater Mode" src="./assets/icons/TheaterMode.svg" id="theaterIcon"></button>
+                            </span>
+                            <span class="icon">
+                                <button id="fullscreen"><img draggable="false" title="Fullscreen" src="./assets/icons/Fullscreen-icon.svg" id="fullscreenIcon"></button>
+                            </span>
+                            <span class="iconCustomForMobile">
+                                <button id="fullscreenMobile"><img draggable="false" title="Fullscreen" src="./assets/icons/Fullscreen-icon.svg" id="fullscreenMobileIcon"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    <div class="settingsContainer">
+                        <div class="mainSettings">
+                            <div class="settingList">
+                                <li id="qualityBtn" role="button" tabindex="0">
+                                    <img draggable="false" src="./assets/icons/Qualityicon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Quality</p><p class="sBtnR" id="qualityStatus">Auto (360p)</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                                </li>
+                                <li id="playbackSpeedBtn" role="button" tabindex="0">
+                                    <img draggable="false" src="./assets/icons/Playback-Speedf-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Playback speed</p><p class="sBtnR" id="playbackStatus">Normal</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                                </li>
+                                <li role="button" tabindex="0">
+                                    <img draggable="false" src="./assets/icons/Caption-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Caption</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                                <li role="button" tabindex="0">
+                                    <img draggable="false" src="./assets/icons/Lock-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Lock screen</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                                <li role="button" tabindex="0">
+                                    <img draggable="false" src="./assets/icons/Setting-icon.svg" id="settingsIconL">
+                                    <div class="settingsTextContainer"><p class="sBtnL">Additional settings</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
+                                </li>
+                            </div>
+                            <div data-label="qualityList" class="qualityList">
+                                <span>
+                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="qualityCloseBtn" role="button" tabindex="0">
+                                    Playback Quality 
+                                </span>
+                                <ul>
+                                  <li data-quality="360" class="active" tabindex="0" role="button" id="deafultQuality">Auto (360p)</li>
+                                </ul>
+                            </div>
+
+                            <div class="playbackList">
+                                <ul>
+                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackCloseBtn" role="button" tabindex="0">
+                                    <span>Playback Speed</span><span id="customLinkRangePlayback" role="button" tabindex="0">Custom</span>
+                                </ul>
+                                <div class="playbackBtnList">
+                                    <li id="customPlaybackStatus" tabindex="0" role="button"></li>
+                                    <li data-speed="0.25" tabindex="0" role="button">0.25</li>
+                                    <li data-speed="0.5" tabindex="0" role="button">0.5</li>
+                                    <li data-speed="0.75" tabindex="0" role="button">0.75</li>
+                                    <li data-speed="1" class="active" tabindex="0" role="button">Normal</li>
+                                    <li data-speed="1.25" tabindex="0" role="button">1.25</li>
+                                    <li data-speed="1.5" tabindex="0" role="button">1.5</li>
+                                    <li data-speed="1.75" tabindex="0" role="button">1.75</li>
+                                    <li data-speed="2" tabindex="0" role="button">2</li>
+                                </div>
+                            </div>
+                            <div class="customRangePlayback">
+                                <ul>
+                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackRangeCloseBtn" role="button" tabindex="0">
+                                    <span>Custom</span>
+                                </ul>
+                                <p id="PlaybackRangeValue">1x</p>
+                                <input type="range" min="25" max="200" value="100" step="5" id="rangeCustomPlayback">
+                            </div>
+                        </div>
+                    </div>
+
+                
+                </div>
+            </div>
+        </div>
+        <div>
+            <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>
+            <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>
+            <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>
+            <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>
+            <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
