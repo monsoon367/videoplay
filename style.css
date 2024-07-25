@@ -35,9 +35,13 @@ video::cue {
     max-width: 90%;
     transform: translate(-50%, -50%);
     text-align: center;
-    user-select: none;
     transition: bottom 150ms;
     pointer-events: none;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     z-index: 100;
 }
 .caption_text.active {
@@ -58,7 +62,6 @@ video::cue {
     height: 478px;
     border-radius: 15px;
     background-color: rgb(0, 0, 0);
-    overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -75,8 +78,6 @@ video::cue {
     border-radius: 0px;
 }
 
-
-
 #mainVideo {
     display: flex;
     margin: auto;
@@ -84,23 +85,34 @@ video::cue {
     width: 100%;
     height: 100%;
     outline: none;
-    border-radius: 0px;
+    border-radius: 15px;
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
     z-index: 3;
 }
+#mainVideo.fulscreenCustom {
+    border-radius: 0px;
+}
 
 #canvas {
     border-radius: 5px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     filter: blur(40px);
     opacity: 0.5;
     z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: opacity 2s;
   }
+#canvas.unactive {
+    opacity: 0;
+}
 
 .mainVideoClickF {
     position: absolute; 
@@ -118,11 +130,65 @@ video::cue {
     left: 0;
     width: 1%;
     height:100%;
-    z-index: 7;
+    z-index: 11;
 }
 .mainVideoLeftMinorSensor.active {
     display: block;
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 15px;
+    outline: transparent;
+    border: transparent;
+}
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #cccccc41;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 0;
+    bottom: -2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.switch .slider.active::before {
+    left: 21px;
+}
+.switch .slider.active {
+    background: red;
+}
+  
+  /* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+  
+
 
 /*popupElementContainer*/
 .popupElementContainer {
@@ -328,6 +394,17 @@ video::cue {
     width: 30px;
 }
 
+.controllersContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.controllersContainer.activeFullscreen {
+    border-radius: 0px;
+}
+
 .headerControllers {
     position: absolute;
     display: none;
@@ -362,7 +439,6 @@ video::cue {
     opacity: 1;
     pointer-events: fill;
 }
-
 .headerLeftControllers {
     display: inline-flex;
     justify-content: center;
@@ -385,7 +461,6 @@ video::cue {
     user-select: none;
     -webkit-user-select: none;
 }
-
 .headerControllers .icon img {
     display: flex;
     align-items: center;
@@ -395,7 +470,6 @@ video::cue {
     width: 20px;
     filter: invert(100%);
 }
-
 .headerControllers .icon button {
     border: none;
     background: none;
@@ -452,11 +526,12 @@ video::cue {
     background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
     width: 100%;
     aspect-ratio: 6 / 1;
-    z-index: 2;
+    z-index: 4;
     pointer-events: none;
     touch-action: none;
     opacity: 1;
 }
+
 .controllers.active {
     visibility: visible;
     opacity: 1;
@@ -479,13 +554,14 @@ video::cue {
     margin: auto;
     width: 100%;
     height: 15px;
+    cursor: pointer;
 }
 
 /*MainProgresBuffer*/
 .progressBarBufBg {
     position: relative;
     margin: auto;
-    width: 98%;
+    width: 96%;
     height: 4px;
     background: #f0f0f063;
     pointer-events: none;
@@ -505,10 +581,21 @@ video::cue {
     position: relative;
     width: 0%;
     height: 4px;
-    background: red;
+    background: rgb(255, 0, 0);
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
+}
+.progressShadow::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(255, 0, 0);
 }
 /*progressContainer finnish*/
 
@@ -662,10 +749,11 @@ video::cue {
     position: relative;
     margin-right: 8px !important;
     background: #b6b6b6;
+    cursor: pointer;
   }
-  .icon .auto-play:focus {
+.icon .auto-play:focus {
     outline-offset: 10px;
-  }
+}
 .icon .auto-play::before {
     content: '\e034';
     font-family: "material symbols outlined";
@@ -682,6 +770,7 @@ video::cue {
     filter: invert(0%);
     position: absolute;
     left: -5px;
+    transition: .4s;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -775,6 +864,7 @@ video::cue {
     height: 100%;
     right: 0%;
     transition: 150ms ease-in-out;
+    overflow: auto;
     padding: 5px;
 }
 .setButToLeft {
@@ -795,8 +885,7 @@ video::cue {
     font-size: 14px;
 }
 .settingList li:hover {
-    background: rgba(255, 0, 0, 0.9);
-    border: 2px rgba(21, 21, 21, 0.9);
+    background: rgba(83, 83, 83, 0.546);
     transition: 150ms all;
 }
 .settingsTextContainer {
@@ -890,8 +979,7 @@ video::cue {
     font-size: 18px;
 }
 .qualityList li:hover {
-    background: rgba(255, 0, 0, 0.9);
-    border: 2px rgba(21, 21, 21, 0.9);
+    background: rgba(83, 83, 83, 0.546);
     transition: 150ms all;
 }
 /*playbackSpeed*/
@@ -969,8 +1057,7 @@ video::cue {
     font-size: 18px;
 }
 .playbackList li:hover {
-    background: rgba(255, 0, 0, 0.9);
-    border: 2px rgba(21, 21, 21, 0.9);
+    background: rgba(83, 83, 83, 0.546);
     transition: 150ms all;
 }
 #customPlaybackStatus {
@@ -1089,8 +1176,7 @@ video::cue {
     font-size: 18px;
 }
 .captionList li:hover {
-    background: rgba(255, 0, 0, 0.9);
-    border: 2px rgba(21, 21, 21, 0.9);
+    background: rgba(83, 83, 83, 0.546);
     transition: 150ms all;
 }
 
@@ -1102,6 +1188,7 @@ video::cue {
     *, html {
         scrollbar-width: none;
     }
+
     .videoPlayer {
         display: flex;
         position: fixed;
@@ -1109,7 +1196,6 @@ video::cue {
         height: auto;
         border-radius: 0px;
         background-color: rgb(0, 0, 0);
-        overflow: hidden;
         user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -1130,6 +1216,29 @@ video::cue {
         pointer-events: none;
         user-select: none;
         -webkit-user-select: none;
+    }
+
+    #containerAV {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 30%;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        overflow: hidden;
+        z-index: 4;
+        bottom: 0;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    #audioVisualizer {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
     }
 
     .controllers {

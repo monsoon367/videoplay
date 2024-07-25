@@ -10,56 +10,59 @@
 <body>
     <div class="videoContainer">
         <div class="container">
-            <canvas id="canvas"></canvas>
-                <div class="videoPlayer paused">
-                    <video preload="metadata" id="mainVideo" muted>
-                        <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(360P).mp4" size="360" type="video/mp4">
-                        <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(720P_60FPS).mp4" size="720" type="video/mp4">
-                        <track label="English" kind="subtitles" src="./caption/English.vtt" srclang="en">
-                        <track label="Indonesia" kind="subtitles" src="./caption/Indonesia.vtt" srclang="en">
-                    </video>
-                    
-                    <!--controller-->
-                    <p class="caption_text"></p>
-                    <div class="mainVideoLeftMinorSensor"></div>
-                    <div class="popupElementContainer">
-                        <div class="popupElement">
-                            <div class="blockLeft">
-                                <div class="rewindNotif">
-                                    <p>-10</p>
-                                    <div class="speedArrow">
-                                        <p style="padding-right: 12px;"><span class="arrowLOne">&blacktriangleleft;</span><span class="arrowLTwo">&blacktriangleleft;</span><span class="arrowLThree">&blacktriangleleft;</span></p>
-                                    </div>
+            <div class="videoPlayer paused">
+                <video preload="metadata" id="mainVideo" muted>
+                    <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(360P).mp4" size="360" type="video/mp4">
+                    <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(720P_60FPS).mp4" size="720" type="video/mp4">
+                    <track label="English" kind="subtitles" src="./caption/English.vtt" srclang="en">
+                    <track label="Indonesia" kind="subtitles" src="./caption/Indonesia.vtt" srclang="en">
+                </video>
+                <canvas id="canvas"></canvas>
+
+                <!--controller-->
+                <p class="caption_text"></p>
+                <div class="mainVideoLeftMinorSensor"></div>
+                <div class="popupElementContainer">
+                    <div class="popupElement">
+                        <div class="blockLeft">
+                            <div class="rewindNotif">
+                                <p>-10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowLOne">&blacktriangleleft;</span><span class="arrowLTwo">&blacktriangleleft;</span><span class="arrowLThree">&blacktriangleleft;</span></p>
                                 </div>
                             </div>
-                            <div class="blockMiddle">
-                                <div class="twoTimeSpeedNotif">
-                                    <p>2<span style="font-size: 10px;">X</span></p><div><p style="font-size: 30px; letter-spacing: -14px; line-height: 0.8;">&blacktriangleright;&blacktriangleright;</p></div>
-                                </div>
+                        </div>
+                        <div class="blockMiddle">
+                            <div class="twoTimeSpeedNotif">
+                                <p>2<span style="font-size: 10px;">X</span></p><div><p style="font-size: 30px; letter-spacing: -14px; line-height: 0.8;">&blacktriangleright;&blacktriangleright;</p></div>
                             </div>
-                            <div class="blockRight">
-                                <div class="forwardNotif">
-                                    <p>10</p>
-                                    <div class="speedArrow">
-                                        <p style="padding-right: 12px;"><span class="arrowROne">&blacktriangleright;</span><span class="arrowRTwo">&blacktriangleright;</span><span class="arrowRThree">&blacktriangleright;</span></p>
-                                    </div>
+                        </div>
+                        <div class="blockRight">
+                            <div class="forwardNotif">
+                                <p>10</p>
+                                <div class="speedArrow">
+                                    <p style="padding-right: 12px;"><span class="arrowROne">&blacktriangleright;</span><span class="arrowRTwo">&blacktriangleright;</span><span class="arrowRThree">&blacktriangleright;</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="controllersMobile active">
-                        <div class="listMobileControllers">
-                            <div class="blockRewind"></div>
-                            <div class="blockCenter">
-                                <span class="iconMobile">
-                                    <button  id="playPauseMobile"><img draggable="false"src="./assets/icons/Play-icon.svg" id="playPauseMobileIcon"></button>
-                                </span>
-                            </div>
-                            <div class="blockForward"></div>
+                </div>
+
+                <div class="controllersMobile active">
+                    <div class="listMobileControllers">
+                        <div class="blockRewind"></div>
+                        <div class="blockCenter">
+                            <span class="iconMobile">
+                                <button  id="playPauseMobile"><img draggable="false"src="./assets/icons/Play-icon.svg" id="playPauseMobileIcon"></button>
+                            </span>
                         </div>
+                        <div class="blockForward"></div>
                     </div>
-                    <div class="mainVideoClickF"></div>
-                    
+                </div>
+                
+                <div class="mainVideoClickF"></div>
+                
+                <div class="controllersContainer">
                     <div class="headerControllers active">
                         <div class="headerListControllers">
                             <div class="headerLeftControllers">
@@ -78,12 +81,13 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="controllers active">
                         <div class="progressContainer">
                             <div id="MainProgresInput">
-                                <div class="progressBarBufBg" tabindex="-1">
-                                    <canvas class="progressBuffer" tabindex="-1"></canvas>
-                                    <div class="progressShadow" tabindex="-1"></div>
+                                <div class="progressBarBufBg">
+                                    <canvas class="progressBuffer"></canvas>
+                                    <div class="progressShadow"></div>
                                 </div>
                             </div>
                         </div>
@@ -132,79 +136,80 @@
                             </div>
                         </div>
                     </div>
-                    <div class="settingsContainer">
-                        <div class="mainSettings">
-                            <div class="settingList">
-                                <li id="qualityBtn" role="button" tabindex="0">
-                                    <img draggable="false" src="./assets/icons/Qualityicon.svg" id="settingsIconL">
-                                    <div class="settingsTextContainer"><p class="sBtnL">Quality</p><p class="sBtnR" id="qualityStatus">Auto (360p)</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
-                                </li>
-                                <li id="playbackSpeedBtn" role="button" tabindex="0">
-                                    <img draggable="false" src="./assets/icons/Playback-Speedf-icon.svg" id="settingsIconL">
-                                    <div class="settingsTextContainer"><p class="sBtnL">Playback speed</p><p class="sBtnR" id="playbackStatus">Normal</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
-                                </li>
-                                <li id="CaptionListBtn" role="button" tabindex="0">
-                                    <img draggable="false" src="./assets/icons/Caption-icon.svg" id="settingsIconL">
-                                    <div class="settingsTextContainer"><p class="sBtnL">Caption</p><p class="sBtnR" id="CaptionStatus">OFF</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
-                                </li>
-                                <li role="button" tabindex="0">
-                                    <img draggable="false" src="./assets/icons/Lock-icon.svg" id="settingsIconL">
-                                    <div class="settingsTextContainer"><p class="sBtnL">Lock screen</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
-                                </li>
-                                <li role="button" tabindex="0">
-                                    <img draggable="false" src="./assets/icons/Setting-icon.svg" id="settingsIconL">
-                                    <div class="settingsTextContainer"><p class="sBtnL">Additional settings</p><p class="sBtnR"></p></div><img draggable="false" src="" id="settingsIconR">
-                                </li>
-                            </div>
-                            <div data-label="qualityList" class="qualityList">
-                                <span>
-                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="qualityCloseBtn" role="button" tabindex="0">
-                                    Playback Quality 
-                                </span>
-                                <ul>
-                                  <li data-quality="360" class="active" tabindex="0" role="button" id="deafultQuality">Auto (360p)</li>
-                                </ul>
-                            </div>
-    
-                            <div class="playbackList">
-                                <ul>
-                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackCloseBtn" role="button" tabindex="0">
-                                    <span>Playback Speed</span><span id="customLinkRangePlayback" role="button" tabindex="0">Custom</span>
-                                </ul>
-                                <div class="playbackBtnList">
-                                    <li id="customPlaybackStatus" tabindex="0" role="button"></li>
-                                    <li data-speed="0.25" tabindex="0" role="button">0.25</li>
-                                    <li data-speed="0.5" tabindex="0" role="button">0.5</li>
-                                    <li data-speed="0.75" tabindex="0" role="button">0.75</li>
-                                    <li data-speed="1" class="active" tabindex="0" role="button">Normal</li>
-                                    <li data-speed="1.25" tabindex="0" role="button">1.25</li>
-                                    <li data-speed="1.5" tabindex="0" role="button">1.5</li>
-                                    <li data-speed="1.75" tabindex="0" role="button">1.75</li>
-                                    <li data-speed="2" tabindex="0" role="button">2</li>
-                                </div>
-                            </div>
-                            <div class="customRangePlayback">
-                                <ul>
-                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackRangeCloseBtn" role="button" tabindex="0">
-                                    <span>Custom</span>
-                                </ul>
-                                <p id="PlaybackRangeValue">1x</p>
-                                <input type="range" min="25" max="200" value="100" step="5" id="rangeCustomPlayback">
-                            </div>
-                            <div class="captionList">
-                                <div class="caption">
-                                    <span>
-                                        <img draggable="false" src="./assets/icons/Chevron-left.svg" id="captionCloseBtn" role="button" tabindex="0">
-                                        Select Subtitle
-                                    </span>
-                                  <ul>
-                                    <li data-track="English" class="active">Deafult (English)</li>
-                                  </ul>
-                                </div>
-                              </div>
+                </div>
+                <div class="settingsContainer">
+                    <div class="mainSettings">
+                        <div class="settingList">
+                            <li id="ambientBtn" role="button" tabindex="0">
+                                <img draggable="false" src="./assets/icons/Setting-icon.svg" id="settingsIconL">
+                                <div class="settingsTextContainer"><p class="sBtnL">Ambient Mode</p></div>
+                                <label class="switch" style="pointer-events: none; bottom: -1px;">
+                                    <input type="checkbox" tabindex="-1">
+                                    <span class="slider round active"></span>
+                                </label>
+                            </li>
+                            <li id="CaptionListBtn" role="button" tabindex="0">
+                                <img draggable="false" src="./assets/icons/Caption-icon.svg" id="settingsIconL">
+                                <div class="settingsTextContainer"><p class="sBtnL">Caption</p><p class="sBtnR" id="CaptionStatus">Off</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                            </li>
+                            <li id="playbackSpeedBtn" role="button" tabindex="0">
+                                <img draggable="false" src="./assets/icons/Playback-Speedf-icon.svg" id="settingsIconL">
+                                <div class="settingsTextContainer"><p class="sBtnL">Playback speed</p><p class="sBtnR" id="playbackStatus">Normal</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                            </li>
+                            <li id="qualityBtn" role="button" tabindex="0">
+                                <img draggable="false" src="./assets/icons/Qualityicon.svg" id="settingsIconL">
+                                <div class="settingsTextContainer"><p class="sBtnL">Quality</p><p class="sBtnR" id="qualityStatus">Auto (360p)</p></div><img draggable="false" src="./assets/icons/Chevron-right.svg" id="settingsIconR">
+                            </li>
                         </div>
+                        <div data-label="qualityList" class="qualityList">
+                            <span>
+                                <img draggable="false" src="./assets/icons/Chevron-left.svg" id="qualityCloseBtn" role="button" tabindex="0">
+                                Playback Quality 
+                            </span>
+                            <ul>
+                              <li data-quality="360" class="active" tabindex="0" role="button" id="deafultQuality">Auto (360p)</li>
+                            </ul>
+                        </div>
+
+                        <div class="playbackList">
+                            <ul>
+                                <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackCloseBtn" role="button" tabindex="0">
+                                <span>Playback Speed</span><span id="customLinkRangePlayback" role="button" tabindex="0">Custom</span>
+                            </ul>
+                            <div class="playbackBtnList">
+                                <li id="customPlaybackStatus" tabindex="0" role="button"></li>
+                                <li data-speed="0.25" tabindex="0" role="button">0.25</li>
+                                <li data-speed="0.5" tabindex="0" role="button">0.5</li>
+                                <li data-speed="0.75" tabindex="0" role="button">0.75</li>
+                                <li data-speed="1" class="active" tabindex="0" role="button">Normal</li>
+                                <li data-speed="1.25" tabindex="0" role="button">1.25</li>
+                                <li data-speed="1.5" tabindex="0" role="button">1.5</li>
+                                <li data-speed="1.75" tabindex="0" role="button">1.75</li>
+                                <li data-speed="2" tabindex="0" role="button">2</li>
+                            </div>
+                        </div>
+                        <div class="customRangePlayback">
+                            <ul>
+                                <img draggable="false" src="./assets/icons/Chevron-left.svg" id="playbackRangeCloseBtn" role="button" tabindex="0">
+                                <span>Custom</span>
+                            </ul>
+                            <p id="PlaybackRangeValue">1x</p>
+                            <input type="range" min="25" max="200" value="100" step="5" id="rangeCustomPlayback">
+                        </div>
+                        <div class="captionList">
+                            <div class="caption">
+                                <span>
+                                    <img draggable="false" src="./assets/icons/Chevron-left.svg" id="captionCloseBtn" role="button" tabindex="0">
+                                    Select Subtitle
+                                </span>
+                              <ul>
+
+                              </ul>
+                            </div>
+                          </div>
                     </div>
                 </div>
+            </div>
         </div>
         <div>
             <h1 style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nulla fugit modi officiis consequuntur similique, placeat doloremque nam? Molestiae delectus nemo debitis nihil maiores, facere aspernatur? Sit, facere amet.</h1>

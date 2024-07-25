@@ -16,8 +16,9 @@ mainVideoLeftMinorSensor=videoPlayer.querySelector('.mainVideoLeftMinorSensor'),
 headerControllers=videoPlayer.querySelector('.headerControllers'),
 controllers=videoPlayer.querySelector('.controllers'),
 controllersMobile=videoPlayer.querySelector('.controllersMobile'),
+controllersContainer=videoPlayer.querySelector('.controllersContainer'),
 
-canvas=videoContainer.querySelector('#canvas'),
+canvas=videoPlayer.querySelector('#canvas'),
 ctx = canvas.getContext("2d"),
 
 
@@ -75,6 +76,10 @@ customRangePlayback=videoPlayer.querySelector('.customRangePlayback'),
 
 pictureInPicture=videoPlayer.querySelector('#pictureInPicture'),
 
+ambientBtn=videoPlayer.querySelector('#ambientBtn'),
+
+slider=videoPlayer.querySelector('.slider'),
+
 theaterMode=videoPlayer.querySelector('#theaterMode'),
 theaterIcon=videoPlayer.querySelector('#theaterIcon'),
 
@@ -103,8 +108,7 @@ qualitys = videoPlayer.querySelectorAll("source[size]"),
 tracks = videoPlayer.querySelectorAll("track");
 
 
-canvas.style.width = mainVideo.clientWidth + "px";
-canvas.style.height = mainVideo.clientHeight + "px";
+
 
 function getCurrentImage() {
   ctx.drawImage(mainVideo, 0, 0, canvas.width, canvas.height);
@@ -140,6 +144,15 @@ mainVideo.addEventListener('timeupdate', function() {
     const proggres = (mainVideo.currentTime / mainVideo.duration) * 100;
     progressShadow.style.width = proggres + "%";
 });
+
+progressContainer.addEventListener("pointerdown", (e) => {
+    progressContainer.setPointerCapture(e.pointerId);
+    setTimelinePosition(e);
+    progressContainer.addEventListener("pointermove", setTimelinePosition);
+    progressContainer.addEventListener("pointerup", () => {
+        progressContainer.removeEventListener("pointermove", setTimelinePosition);
+    })
+  });
 
 function drawProgress(canvas, buffered, duration) {
     let context = canvas.getContext('2d', { antialias: false });
@@ -260,6 +273,8 @@ function formatDuration(time){
 }
 //)
 
+
+
 //autoplay btn function {
 autoplay.addEventListener("click", () => {
     autoplay.classList.toggle("active");
@@ -311,6 +326,8 @@ settingMobile.addEventListener('click',() => {
     }
 })
 
+
+
 mainVideoClickF.addEventListener('click',toggleSettingCloseAll);
 playPause.addEventListener('click', toggleSettingCloseAll);
 fastRewind.addEventListener('click', toggleSettingCloseAll);
@@ -322,6 +339,11 @@ fullscreenMobile.addEventListener('click', toggleSettingCloseAll);
 fullscreen.addEventListener('click', toggleSettingCloseAll);
 
 //setting list function
+ambientBtn.addEventListener("click", () => {
+    slider.classList.toggle("active");
+    canvas.classList.toggle("unactive");
+});
+
 qualityBtn.addEventListener('click',() => {
     settingList.classList.add("playListToLeft");
     qualityList.classList.add("qualityListOpen");
@@ -460,7 +482,7 @@ captionCloseBtn.addEventListener('click',() => {
 if (tracks.length != 0) {
     caption_labels.insertAdjacentHTML(
         "afterbegin",
-        `<li data-track="OFF" class="active">OFF</li>`
+        `<li data-track="Off" class="active">Off</li>`
       );
     for (let i = 0; i < tracks.length; i++) {
       let trackLi = `<li data-track="${tracks[i].label}">${tracks[i].label}</li>`;
@@ -471,14 +493,14 @@ const caption = captionList.querySelectorAll("ul li");
 
 caption.forEach((event) => {
     let label = event.getAttribute('data-track');
-    let OFF = "OFF";
+    let Off = "Off";
     event.addEventListener("click", () => {
         removeActiveClasses(caption);
         event.classList.add("active");
         changeCaption(event);
         caption_text.innerHTML = "";
         CaptionStatus.textContent=`${label}`;
-        if (label == OFF) {
+        if (label == Off) {
             captionIcon.classList.remove("active")
         } else {
             captionIcon.classList.add("active")
@@ -579,6 +601,8 @@ videoPlayer.classList.contains("fulscreenCustom");
       fullscreenIcon.title = "Enter Fullscreen"
       videoPlayer.classList.remove("fulscreenCustom");
       videoPlayer.classList.remove("fulscreenMobileCustom");
+      mainVideo.classList.remove("fulscreenCustom");
+      controllersContainer.classList.remove("activeFullscreen");
       headerControllers.classList.remove("activeFullscreen");
       mainVideoLeftMinorSensor.classList.remove("active");
     } else {
@@ -587,6 +611,8 @@ videoPlayer.classList.contains("fulscreenCustom");
       fullscreenIcon.title = "Exit Fullscreen"
       videoPlayer.classList.add("fulscreenCustom");
       videoPlayer.classList.add("fulscreenMobileCustom");
+      mainVideo.classList.add("fulscreenCustom");
+      controllersContainer.classList.add("activeFullscreen");
       headerControllers.classList.add("activeFullscreen");
       mainVideoLeftMinorSensor.classList.add("active");
     }
@@ -765,6 +791,9 @@ mainVideo.addEventListener('ended' ,myHandler,false);
         caption_text.classList.add('active');
 };
 //}
+
+
+
 
 
 
