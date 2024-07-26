@@ -504,6 +504,12 @@ video::cue {
 #settingMobile {
     display: none;
 }
+.videoFullscreenTitle {
+    display: none;
+}
+.videoFullscreenTitle.active {
+    display: block;
+}
 
 .controllers {
     position: absolute;

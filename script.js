@@ -14,6 +14,7 @@ const mainVideo=videoPlayer.querySelector('#mainVideo'),
 mainVideoClickF=videoPlayer.querySelector('.mainVideoClickF'),
 mainVideoLeftMinorSensor=videoPlayer.querySelector('.mainVideoLeftMinorSensor'),
 headerControllers=videoPlayer.querySelector('.headerControllers'),
+videoFullscreenTitle=videoPlayer.querySelector('.videoFullscreenTitle'),
 controllers=videoPlayer.querySelector('.controllers'),
 controllersMobile=videoPlayer.querySelector('.controllersMobile'),
 controllersContainer=videoPlayer.querySelector('.controllersContainer'),
@@ -661,6 +662,7 @@ videoPlayer.classList.contains("fulscreenCustom");
       controllersContainer.classList.remove("activeFullscreen");
       headerControllers.classList.remove("activeFullscreen");
       mainVideoLeftMinorSensor.classList.remove("active");
+      videoFullscreenTitle.classList.remove('active');
     } else {
       fullscreenIcon.src = "./assets/icons/Fullscreen-Exit-icon.svg"
       fullscreenMobileIcon.src = "./assets/icons/Fullscreen-Exit-icon.svg"
@@ -671,6 +673,7 @@ videoPlayer.classList.contains("fulscreenCustom");
       controllersContainer.classList.add("activeFullscreen");
       headerControllers.classList.add("activeFullscreen");
       mainVideoLeftMinorSensor.classList.add("active");
+      videoFullscreenTitle.classList.add('active');
     }
 });
 
