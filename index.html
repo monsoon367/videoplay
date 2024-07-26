@@ -82,15 +82,20 @@
                         </div>
                     </div>
 
+                      <!-- <div class="thumbnail"></div> -->
+                    
+
                     <div class="controllers active">
                         <div class="progressContainer">
-                            <div id="MainProgresInput">
-                                <div class="progressBarBufBg">
-                                    <canvas class="progressBuffer"></canvas>
-                                    <div class="progressShadow"></div>
-                                </div>
+                            <div class="progressAreaTime" >0:00</div>
+                            <div class="progress-area">
+                            <canvas class="bufferedBar"></canvas>
+                            <div class="progress-bar">
+                              <span></span>
                             </div>
+                          </div>
                         </div>
+                       
                         <div class="listControllers">
                             <div class="leftControllers">
                                 <span class="icon">
@@ -107,7 +112,7 @@
                                     <input type="range" min="0" max="100" step="1" value="100" id="volumeRange">
                                 </span>
                                 <div class="timer">
-                                    <span class="current">0.00</span> / <span class="duration">0.00</span>
+                                    <span class="current">0:00</span> / <span class="duration">0:00</span>
                                 </div>
                             </div>
                             
