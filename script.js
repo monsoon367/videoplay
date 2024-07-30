@@ -19,11 +19,6 @@ controllers=videoPlayer.querySelector('.controllers'),
 controllersMobile=videoPlayer.querySelector('.controllersMobile'),
 controllersContainer=videoPlayer.querySelector('.controllersContainer'),
 
-progressAreaTime = videoPlayer.querySelector(".progressAreaTime"),
-
-progressArea = videoPlayer.querySelector(".progress-area"),
-bufferedBar = videoPlayer.querySelector(".bufferedBar"),
-progress_Bar = videoPlayer.querySelector(".progress-bar"),
 
 canvas=videoPlayer.querySelector('#canvas'),
 ctx = canvas.getContext("2d"),
@@ -48,7 +43,6 @@ volumeBtn=videoPlayer.querySelector('#volumeBtn'),
 volumeBtnIcon=videoPlayer.querySelector('#volumeBtnIcon'),
 volumeRange=videoPlayer.querySelector('#volumeRange'),
 durationMobile=videoPlayer.querySelector('.durationMobile'),
-currentMobile=videoPlayer.querySelector('.currentMobile'),
 duration=videoPlayer.querySelector('.duration'),
 current=videoPlayer.querySelector('.current'),
 
@@ -60,7 +54,6 @@ captionIcon=videoPlayer.querySelector('#captionIcon'),
 settingMobile=videoPlayer.querySelector('#settingMobile'),
 setting=videoPlayer.querySelector('#setting'),
 settingsContainer=videoPlayer.querySelector('.settingsContainer'),
-mainSettings=videoPlayer.querySelector('.mainSettings'),
 
 deafultQuality=videoPlayer.querySelector('#deafultQuality'),
 qualityStatus=videoPlayer.querySelector('#qualityStatus'),
@@ -109,7 +102,87 @@ arrowRTwo=videoPlayer.querySelector('.arrowRTwo'),
 arrowRThree=videoPlayer.querySelector('.arrowRThree'),
 quality_ul = videoPlayer.querySelector(".settingsContainer [data-label='qualityList'] ul"),
 qualitys = videoPlayer.querySelectorAll("source[size]"),
+
+thumbnailImg = videoPlayer.querySelector(".thumbnail-img"),
+timelineContainer = videoPlayer.querySelector(".timeline-container"),
+previewImg = videoPlayer.querySelector(".preview-img"),
+
 tracks = videoPlayer.querySelectorAll("track");
+
+
+
+// Timeline
+timelineContainer.addEventListener("mousemove", handleTimelineUpdate)
+timelineContainer.addEventListener("mousedown", toggleScrubbing)
+document.addEventListener("mouseup", e => {
+  if (isScrubbing) toggleScrubbing(e)
+})
+document.addEventListener("mousemove", e => {
+  if (isScrubbing) handleTimelineUpdate(e)
+})
+
+let isScrubbing = false
+let wasPaused
+
+
+function toggleScrubbing(e) {
+  const rect = timelineContainer.getBoundingClientRect()
+  const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+  isScrubbing = (e.buttons & 1) === 1
+  controllersContainer.classList.toggle("scrubbing", isScrubbing)
+  if (isScrubbing) {
+    wasPaused = mainVideo.paused
+    mainVideo.pause()
+  } else {
+    mainVideo.currentTime = percent * mainVideo.duration
+    if (!wasPaused) mainVideo.play()
+  }
+
+  handleTimelineUpdate(e)
+}
+
+function handleTimelineUpdate(e) {
+  const rect = timelineContainer.getBoundingClientRect()
+  const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+  const previewImgNumber = Math.max(
+    1,
+    Math.floor((percent * mainVideo.duration) / 5)
+  )
+  const previewImgSrc = `assets/previewImgs/preview${previewImgNumber}.jpg`
+  previewImg.src = previewImgSrc
+  timelineContainer.style.setProperty("--preview-position", percent)
+
+  if (isScrubbing) {
+    e.preventDefault()
+    thumbnailImg.src = previewImgSrc
+    timelineContainer.style.setProperty("--progress-position", percent)
+  }
+}
+
+
+let mainVideoSources = mainVideo.querySelectorAll("source");
+for (let i = 0; i < mainVideoSources.length; i++) {
+  let videoUrl = mainVideoSources[i].src;
+  blobUrl(mainVideoSources[i], videoUrl);
+}
+function blobUrl(video, videoUrl) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", videoUrl);
+  xhr.responseType = "arraybuffer";
+  xhr.onload = (e) => {
+    let blob = new Blob([xhr.response]);
+    let url = URL.createObjectURL(blob);
+    video.src = url;
+  };
+  xhr.send();
+}
+
+mainVideo.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+
+
 
 
 
@@ -143,91 +216,10 @@ document.addEventListener('keyup',(event) => {
     }
 })
 
-
 mainVideo.addEventListener("timeupdate", (e) => {
-    let currentVideoTime = e.target.currentTime;
-    let currentMin = Math.floor(currentVideoTime / 60);
-    let currentSec = Math.floor(currentVideoTime % 60);
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    current.innerHTML = `${currentMin}:${currentSec}`;
-
-    let videoDuration = e.target.duration;
-    // progressBar width change
-    let progressWidth = (currentVideoTime / videoDuration) * 100;
-    progress_Bar.style.width = `${progressWidth}%`;
-});
-
-progressArea.addEventListener("pointerdown", (e) => {
-    progressArea.setPointerCapture(e.pointerId);
-    setTimelinePosition(e);
-    progressArea.addEventListener("pointermove", setTimelinePosition);
-    progressArea.addEventListener("pointerup", () => {
-      progressArea.removeEventListener("pointermove", setTimelinePosition);
-    })
-  });
-
-
-function setTimelinePosition(e) {
-    let videoDuration = mainVideo.duration;
-    let progressWidthval = progressArea.clientWidth + 2;
-    let ClickOffsetX = e.offsetX;
-    mainVideo.currentTime = (ClickOffsetX / progressWidthval) * videoDuration;
-
-    let progressWidth = (mainVideo.currentTime / videoDuration) * 100;
-    progress_Bar.style.width = `${progressWidth}%`;
-
-    let currentVideoTime = mainVideo.currentTime;
-    let currentMin = Math.floor(currentVideoTime / 60);
-    let currentSec = Math.floor(currentVideoTime % 60);
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    current.innerHTML = `${currentMin}:${currentSec}`;
-
-}
-
-function drawProgress(canvas, buffered, duration) {
-    let context = canvas.getContext('2d', { antialias: false });
-    context.fillStyle = "#e4e4e4";
-    let height = canvas.height;
-    let width = canvas.width;
-    if (!height || !width) throw "Canva's width or height or not set.";
-    context.clearRect(0, 0, width, height);
-    for (let i = 0; i < buffered.length; i++) {
-      let leadingEdge = buffered.start(i) / duration * width;
-      let trailingEdge = buffered.end(i) / duration * width;
-      context.fillRect(leadingEdge, 0, trailingEdge - leadingEdge, height)
-    }
-  }
-mainVideo.addEventListener('progress', () => {
-    drawProgress(bufferedBar, mainVideo.buffered, mainVideo.duration);
-})
-
-
-progressArea.addEventListener("mousemove", (e) => {
-    let progressWidthval = progressArea.clientWidth;
-    let x = e.offsetX;
-    let videoDuration = mainVideo.duration;
-    let progressTime = Math.floor((x / progressWidthval) * videoDuration);
-    let currentMin = Math.floor(progressTime / 60);
-    let currentSec = Math.floor(progressTime % 60);
-    progressAreaTime.style.setProperty("--x", `${x}px`);
-    progressAreaTime.style.display = "block";
-    if (x >= progressWidthval - 80) {
-      x = progressWidthval - 80;
-    } else if (x <= 75) {
-      x = 75;
-    } else {
-      x = e.offsetX;
-    }
-
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    progressAreaTime.innerHTML = `${currentMin}:${currentSec}`;
-});
-
-progressArea.addEventListener("mouseleave", () => {
-    progressAreaTime.style.display = "none";
+    current.textContent = formatDuration(mainVideo.currentTime)
+    const percent = mainVideo.currentTime / mainVideo.duration
+    timelineContainer.style.setProperty("--progress-position", percent)
 });
 
 
@@ -713,7 +705,6 @@ blockForward.addEventListener('touchend', toggleEndTwoTimeSpeed);
 //mouse touch control show hide event function {
 fastForward.onmouseover = fastForward.onmouseout = handler;
 fastRewind.onmouseover = fastRewind.onmouseout = handler;
-progressArea.onmouseover = progressArea.onmouseout = handler;
 volumeBtn.onmouseover = volumeBtn.onmouseout = handler;
 autoplay.onmouseover = autoplay.onmouseout = handler;
 caption.onmouseover = captionBtn.onmouseout = handler;
