@@ -19,6 +19,9 @@
                 </video>
                 <canvas id="canvas"></canvas>
 
+                <div class="thumbnail-img"></div>
+                <div class="thumbnail"></div>
+
                 <!--controller-->
                 <p class="caption_text"></p>
                 <div class="mainVideoLeftMinorSensor"></div>
@@ -80,17 +83,20 @@
                                 </span>
                             </div>
                         </div>
-                    </div>                    
-                    <img class="thumbnail-img">
+                    </div>
+
+
+                    
+
                     <div class="controllers active">
-                       
                         <div class="progressContainer">
-                            <div class="timeline-container">
-                                <div class="timeline">
-                                  <img class="preview-img">
-                                  <div class="thumb-indicator"></div>
-                                </div>
+                            <div class="progressAreaTime" >0:00</div>
+                            <div class="progress-area">
+                            <canvas class="bufferedBar"></canvas>
+                            <div class="progress-bar">
+                              <span></span>
                             </div>
+                          </div>
                         </div>
                        
                         <div class="listControllers">
