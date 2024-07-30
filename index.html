@@ -11,16 +11,13 @@
     <div class="videoContainer">
         <div class="container">
             <div class="videoPlayer paused">
-                <video preload="metadata" id="mainVideo">
+                <video preload="metadata" id="mainVideo" muted>
                     <source src="./assets/videoSource/ORA ORA ORA ORA ORA 60FPS(360P).mp4" size="360" type="video/mp4">
                     <source src="./assets/videoSource/ORA ORA ORA ORA ORA 60FPS(720P_60FPS).mp4" size="720" type="video/mp4">
                     <track label="English" kind="subtitles" src="./caption/English.vtt" srclang="en">
                     <track label="Indonesia" kind="subtitles" src="./caption/Indonesia.vtt" srclang="en">
                 </video>
                 <canvas id="canvas"></canvas>
-
-                <div class="thumbnail-img"></div>
-                <div class="thumbnail"></div>
 
                 <!--controller-->
                 <p class="caption_text"></p>
@@ -69,7 +66,7 @@
                     <div class="headerControllers active">
                         <div class="headerListControllers">
                             <div class="headerLeftControllers">
-                                <p class="videoFullscreenTitle">sfdsdn</p>
+                                <p class="fullscreenTitle">sfdsdn</p>
                             </div>
                             <div class="headerRightControllers">
                                 <span class="icon">
@@ -85,7 +82,7 @@
                         </div>
                     </div>
 
-
+                      <!-- <div class="thumbnail"></div> -->
                     
 
                     <div class="controllers active">
