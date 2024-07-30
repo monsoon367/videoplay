@@ -538,74 +538,65 @@ video::cue {
     pointer-events: fill;
 }
 
-.progressAreaTime {
-    position: absolute;
-    left: calc(var(--x) + 18px);
-    transform: translateX(-50%);
-    bottom: 10px;
-    min-width: 60px;
-    text-align: center;
-    white-space: nowrap;
-    padding: 5px 10px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 400;
-    z-index: 1;
-    display: none;
-    pointer-events: none;
-  }
-
 /*progressContainer start*/
 .progressContainer {
     width: 100%;
     position: absolute;
     z-index: 10;
-    top: 0%;
-    transform: translateY(0%);
+    top: -10%;
+    transform: translateY(10%);
 }
-.progress-area {
+
+/*MainProgresInput*/
+#MainProgresInput {
+    display: flex;
+    position:absolute;
+    margin: auto;
+    width: 100%;
+    height: 15px;
+    cursor: pointer;
+}
+
+/*MainProgresBuffer*/
+.progressBarBufBg {
+    position: relative;
+    margin: auto;
     width: 96%;
     height: 4px;
-    margin: auto;
     background: #f0f0f063;
-    cursor: pointer;
-    position: relative;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
-  
-.progress-bar {
+.progressBuffer {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+/*MainProgresShadow*/
+.progressShadow {
     position: relative;
     width: 0%;
+    height: 4px;
     background: rgb(255, 0, 0);
-    height: inherit;
-    border-radius: inherit;
-    cursor: pointer;
-  }
-  
-.progress-bar::before {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.progressShadow::before {
     content: "";
     position: absolute;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    right: -9px;
+    right: -5px;
     top: 50%;
     transform: translateY(-50%);
     background: rgb(255, 0, 0);
-    opacity: 0;
-    transition: opacity 150ms;
 }
-.progress-area:hover .progress-bar::before {
-    opacity: 1;
-    transition: opacity 150ms;
-}
-  
-.bufferedBar{
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    width: 100%;
-    height: inherit;
-  }
 /*progressContainer finnish*/
 
 .leftControllers .icon {
@@ -1270,21 +1261,25 @@ video::cue {
         opacity: 0;
     }
 
-    
-
     .progressContainer {
         width: 100%;
         position: absolute;
-        top: 70%;
-        transform: translateY(-70%);
+        top: 60%;
+        transform: translateY(-60%);
     }
 
     /*MainProgresBuffer*/
-    .progress-area {
-        width: 80%;
+    .progressBarBufBg {
+        height: 2px;
+        width: 85%;
+    }
+    .progressBuffer {
         height: 2px;
     }
-
+    /*MainProgresShadow*/
+    .progressShadow {
+        height: 2px;
+    }
     /*progressContainer finnish*/
 
 

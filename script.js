@@ -18,12 +18,6 @@ controllers=videoPlayer.querySelector('.controllers'),
 controllersMobile=videoPlayer.querySelector('.controllersMobile'),
 controllersContainer=videoPlayer.querySelector('.controllersContainer'),
 
-progressAreaTime = videoPlayer.querySelector(".progressAreaTime"),
-
-progressArea = videoPlayer.querySelector(".progress-area"),
-bufferedBar = videoPlayer.querySelector(".bufferedBar"),
-progress_Bar = videoPlayer.querySelector(".progress-bar"),
-
 canvas=videoPlayer.querySelector('#canvas'),
 ctx = canvas.getContext("2d"),
 
@@ -33,7 +27,10 @@ fullscreenIcon=videoPlayer.querySelector('#fullscreenIcon'),
 fullscreenMobile=videoPlayer.querySelector('#fullscreenMobile'),
 fullscreenMobileIcon=videoPlayer.querySelector('#fullscreenMobileIcon'),
 
-
+progressContainer=videoPlayer.querySelector('.progressContainer'),
+rangeProgress=videoPlayer.querySelector('#rangeProgress'),
+progressShadow=videoPlayer.querySelector('.progressShadow'),
+progressBuffer=videoPlayer.querySelector('.progressBuffer'),
 blockRewind=videoPlayer.querySelector('.blockRewind'),
 blockCenter=videoPlayer.querySelector('.blockCenter'),
 blockForward=videoPlayer.querySelector('.blockForward'),
@@ -142,48 +139,20 @@ document.addEventListener('keyup',(event) => {
     }
 })
 
-
-mainVideo.addEventListener("timeupdate", (e) => {
-    let currentVideoTime = e.target.currentTime;
-    let currentMin = Math.floor(currentVideoTime / 60);
-    let currentSec = Math.floor(currentVideoTime % 60);
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    current.innerHTML = `${currentMin}:${currentSec}`;
-
-    let videoDuration = e.target.duration;
-    // progressBar width change
-    let progressWidth = (currentVideoTime / videoDuration) * 100;
-    progress_Bar.style.width = `${progressWidth}%`;
+//sliderupdate function
+mainVideo.addEventListener('timeupdate', function() {
+    const proggres = (mainVideo.currentTime / mainVideo.duration) * 100;
+    progressShadow.style.width = proggres + "%";
 });
 
-progressArea.addEventListener("pointerdown", (e) => {
-    progressArea.setPointerCapture(e.pointerId);
+progressContainer.addEventListener("pointerdown", (e) => {
+    progressContainer.setPointerCapture(e.pointerId);
     setTimelinePosition(e);
-    progressArea.addEventListener("pointermove", setTimelinePosition);
-    progressArea.addEventListener("pointerup", () => {
-      progressArea.removeEventListener("pointermove", setTimelinePosition);
+    progressContainer.addEventListener("pointermove", setTimelinePosition);
+    progressContainer.addEventListener("pointerup", () => {
+        progressContainer.removeEventListener("pointermove", setTimelinePosition);
     })
   });
-
-
-function setTimelinePosition(e) {
-    let videoDuration = mainVideo.duration;
-    let progressWidthval = progressArea.clientWidth + 2;
-    let ClickOffsetX = e.offsetX;
-    mainVideo.currentTime = (ClickOffsetX / progressWidthval) * videoDuration;
-
-    let progressWidth = (mainVideo.currentTime / videoDuration) * 100;
-    progress_Bar.style.width = `${progressWidth}%`;
-
-    let currentVideoTime = mainVideo.currentTime;
-    let currentMin = Math.floor(currentVideoTime / 60);
-    let currentSec = Math.floor(currentVideoTime % 60);
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    current.innerHTML = `${currentMin}:${currentSec}`;
-
-}
 
 function drawProgress(canvas, buffered, duration) {
     let context = canvas.getContext('2d', { antialias: false });
@@ -199,37 +168,8 @@ function drawProgress(canvas, buffered, duration) {
     }
   }
 mainVideo.addEventListener('progress', () => {
-    drawProgress(bufferedBar, mainVideo.buffered, mainVideo.duration);
-})
-
-
-progressArea.addEventListener("mousemove", (e) => {
-    let progressWidthval = progressArea.clientWidth;
-    let x = e.offsetX;
-    let videoDuration = mainVideo.duration;
-    let progressTime = Math.floor((x / progressWidthval) * videoDuration);
-    let currentMin = Math.floor(progressTime / 60);
-    let currentSec = Math.floor(progressTime % 60);
-    progressAreaTime.style.setProperty("--x", `${x}px`);
-    progressAreaTime.style.display = "block";
-    if (x >= progressWidthval - 80) {
-      x = progressWidthval - 80;
-    } else if (x <= 75) {
-      x = 75;
-    } else {
-      x = e.offsetX;
-    }
-
-    // if seconds are less then 10 then add 0 at the begning
-    currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
-    progressAreaTime.innerHTML = `${currentMin}:${currentSec}`;
-});
-
-progressArea.addEventListener("mouseleave", () => {
-    progressAreaTime.style.display = "none";
-});
-
-
+    drawProgress(progressBuffer, mainVideo.buffered, mainVideo.duration);
+  })
 
 //play pause btn function {
 mainVideo.addEventListener("play",()=>{
@@ -312,6 +252,10 @@ volumeRange.addEventListener('input',() => {
 mainVideo.addEventListener('loadedmetadata',() => { 
     duration.textContent = formatDuration(mainVideo.duration);
     durationMobile.textContent = formatDuration(mainVideo.duration);
+});
+mainVideo.addEventListener('timeupdate',() => { 
+    current.textContent = formatDuration(mainVideo.currentTime);
+    currentMobile.textContent = formatDuration(mainVideo.currentTime);
 });
  
 const leadingZeroFormater = new Intl.NumberFormat(undefined, {
@@ -710,7 +654,6 @@ blockForward.addEventListener('touchend', toggleEndTwoTimeSpeed);
 //mouse touch control show hide event function {
 fastForward.onmouseover = fastForward.onmouseout = handler;
 fastRewind.onmouseover = fastRewind.onmouseout = handler;
-progressArea.onmouseover = progressArea.onmouseout = handler;
 volumeBtn.onmouseover = volumeBtn.onmouseout = handler;
 autoplay.onmouseover = autoplay.onmouseout = handler;
 caption.onmouseover = captionBtn.onmouseout = handler;
@@ -848,6 +791,7 @@ mainVideo.addEventListener('ended' ,myHandler,false);
         caption_text.classList.add('active');
 };
 //}
+
 
 
 

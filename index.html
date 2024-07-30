@@ -12,8 +12,8 @@
         <div class="container">
             <div class="videoPlayer paused">
                 <video preload="metadata" id="mainVideo" muted>
-                    <source src="./assets/videoSource/ORA ORA ORA ORA ORA 60FPS(360P).mp4" size="360" type="video/mp4">
-                    <source src="./assets/videoSource/ORA ORA ORA ORA ORA 60FPS(720P_60FPS).mp4" size="720" type="video/mp4">
+                    <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(360P).mp4" size="360" type="video/mp4">
+                    <source src="./videosource/ORA ORA ORA ORA ORA 60FPS(720P_60FPS).mp4" size="720" type="video/mp4">
                     <track label="English" kind="subtitles" src="./caption/English.vtt" srclang="en">
                     <track label="Indonesia" kind="subtitles" src="./caption/Indonesia.vtt" srclang="en">
                 </video>
@@ -82,20 +82,15 @@
                         </div>
                     </div>
 
-                      <!-- <div class="thumbnail"></div> -->
-                    
-
                     <div class="controllers active">
                         <div class="progressContainer">
-                            <div class="progressAreaTime" >0:00</div>
-                            <div class="progress-area">
-                            <canvas class="bufferedBar"></canvas>
-                            <div class="progress-bar">
-                              <span></span>
+                            <div id="MainProgresInput">
+                                <div class="progressBarBufBg">
+                                    <canvas class="progressBuffer"></canvas>
+                                    <div class="progressShadow"></div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                       
                         <div class="listControllers">
                             <div class="leftControllers">
                                 <span class="icon">
@@ -112,7 +107,7 @@
                                     <input type="range" min="0" max="100" step="1" value="100" id="volumeRange">
                                 </span>
                                 <div class="timer">
-                                    <span class="current">0:00</span> / <span class="duration">0:00</span>
+                                    <span class="current">0.00</span> / <span class="duration">0.00</span>
                                 </div>
                             </div>
                             
